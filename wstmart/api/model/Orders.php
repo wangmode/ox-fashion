@@ -915,9 +915,6 @@ class Orders extends Model{
     /**
      * 用户拒收订单
      * @param $userId
-     * @param $orderId
-     * @param $reason
-     * @param $content
      * @return array
      * @throws \think\db\exception\DataNotFoundException
      * @throws \think\db\exception\ModelNotFoundException

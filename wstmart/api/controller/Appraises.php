@@ -40,9 +40,14 @@ class Appraises extends Base{
 	* 根据商品id取评论
 	*/
 	public function getById(){
-		$m = new M();
-		$rs = $m->getById();
-		return $rs;
+        $GoodsAppraises = new GoodsAppraises();
+        $userId = $this->getUserId();
+        try{
+            $rs = $GoodsAppraises->getById($userId);
+            $this->response($rs);
+        }catch (\think\exception $exception){
+            $this->response(0,$exception->getMessage());
+        }
 	}
 
 

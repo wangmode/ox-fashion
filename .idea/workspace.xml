@@ -2,479 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="533a86bb-c11e-4d4c-9955-56eda6bf252a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/wstmart/api/controller/Login.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wstmart/api/controller/Order.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wstmart/api/controller/Tool.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wstmart/api/controller/User.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wstmart/api/model/Areas.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wstmart/api/model/Carts.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wstmart/api/model/Favorites.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wstmart/api/model/GoodsAppraises.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wstmart/api/model/GoodsCats.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wstmart/api/model/Orders.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wstmart/api/model/Tools.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wstmart/api/model/UserAddress.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wstmart/common/model/Str.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/2.1.1.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/auction/controller/Goods.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/auction/model/Auctions.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/auction/view/home/index/detail.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/auction/view/home/users/css/form.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/auction/view/home/users/form.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/auction/view/home/users/list.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/auction/view/home/users/list_money.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/auction/view/mobile/index/css/carts.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/auction/view/mobile/index/css/detail.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/auction/view/mobile/index/css/list.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/auction/view/mobile/index/css/settlement.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/auction/view/mobile/index/css/users_list.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/auction/view/mobile/index/detail.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/auction/view/wechat/index/css/carts.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/auction/view/wechat/index/css/detail.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/auction/view/wechat/index/css/list.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/auction/view/wechat/index/css/settlement.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/auction/view/wechat/index/css/users_list.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/auction/view/wechat/index/detail.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/bargain/model/Shops.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/bargain/view/wechat/index/css/detail.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/bargain/view/wechat/index/css/list.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/bargain/view/wechat/index/css/ns-default.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/bargain/view/wechat/index/css/ns-style-growl.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/bargain/view/wechat/index/css/settlement.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/bargain/view/wechat/index/css/users_list.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/bargain/view/wechat/index/settlement.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/coupon/model/Coupons.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/coupon/view/home/index/coupon.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/coupon/view/home/index/list.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/coupon/view/home/users/list.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/coupon/view/home/users/users.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/coupon/view/mobile/users/coupon.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/coupon/view/shop/edit.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/coupon/view/wechat/users/coupon.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/decoration/view/shop/shop_decoration_preview.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/decoration/view/shop/shop_home.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/decoration/view/shop/static/shop_center.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/distribut/config.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/distribut/controller/Goods.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/distribut/model/Distribut.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/distribut/view/admin/shop_list.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/distribut/view/home/index/goods_detail.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/distribut/view/home/index/goods_list.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/distribut/view/home/index/goodslist.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/distribut/view/home/index/shop_home.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/distribut/view/home/users/money_list.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/distribut/view/home/users/user_list.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/distribut/view/mobile/index/goods_list.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/distribut/view/mobile/share.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/distribut/view/mobile/users/distribut.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/distribut/view/wechat/index/goods_list.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/distribut/view/wechat/share.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/distribut/view/wechat/users/distribut.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/groupon/view/home/index/css/carts.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/groupon/view/home/index/css/goods.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/groupon/view/home/index/css/list.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/groupon/view/home/index/detail.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/groupon/view/home/index/js/goods.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/groupon/view/home/index/list.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/groupon/view/home/index/settlement.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/groupon/view/mobile/index/css/detail.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/groupon/view/mobile/index/css/list.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/groupon/view/mobile/index/css/settlement.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/groupon/view/mobile/index/detail.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/groupon/view/wechat/index/css/detail.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/groupon/view/wechat/index/css/list.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/groupon/view/wechat/index/css/settlement.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/groupon/view/wechat/index/detail.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/integral/view/home/index/css/carts.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/integral/view/home/index/css/goods.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/integral/view/home/index/css/list.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/integral/view/home/index/detail.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/integral/view/home/index/js/goods.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/integral/view/home/index/list.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/integral/view/home/index/settlement.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/integral/view/mobile/index/css/detail.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/integral/view/mobile/index/css/list.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/integral/view/mobile/index/css/settlement.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/integral/view/mobile/index/detail.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/integral/view/mobile/index/settlement.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/integral/view/wechat/index/css/detail.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/integral/view/wechat/index/css/list.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/integral/view/wechat/index/detail.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/integral/view/wechat/index/settlement.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/pintuan/model/Pintuans.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/pintuan/view/default/home/index/css/list.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/pintuan/view/default/home/index/detail.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/pintuan/view/default/home/index/list.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/pintuan/view/default/home/index/settlement.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/pintuan/view/default/shop/shop.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/pintuan/view/default/wechat/index/goods_detail.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/pintuan/view/default/wechat/index/settlement.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/reward/model/Rewards.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/ucenter/view/home/users/user_edit_email.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/ucenter/view/home/users/user_email.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/wstim/Wstim.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/wstim/controller/Dialogcontents.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/wstim/controller/Shops.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/wstim/install.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/wstim/model/Chats.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/wstim/model/Dialogs.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/wstim/uninstall.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/wstim/view/admin/dialogcontents.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/wstim/view/admin/list.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/wstim/view/home/chat/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/wstim/view/mobile/chats/app.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/wstim/view/mobile/chats/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/wstim/view/mobile/shopchats/chat_list.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/wstim/view/mobile/shopchats/chat_list.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/wstim/view/shop/chats/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/wstim/view/shop/index/dialogContent.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/wstim/view/shop/index/dialogcontents.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/wstim/view/shop/index/shop.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/wstim/view/wechat/chat_list.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/wstim/view/wechat/chats/app.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/wstim/view/wechat/chats/chat_list.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/wstim/view/wechat/chats/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/wstim/view/wechat/shopchats/chat_list.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/addons/wstim/view/wechat/shopchats/chat_list.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/static/js/common.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/.htaccess" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/CONTRIBUTING.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/LICENSE.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/base.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/composer.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/convention.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/helper.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/lang/zh-cn.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/App.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/Build.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/Cache.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/Collection.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/Config.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/Console.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/Container.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/Controller.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/Cookie.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/Db.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/Debug.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/Env.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/Error.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/Exception.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/Facade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/File.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/Hook.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/Lang.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/Loader.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/Log.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/Middleware.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/Model.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/Paginator.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/Process.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/Request.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/Response.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/Route.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/Session.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/Template.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/Url.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/Validate.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/View.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/cache/Driver.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/cache/driver/File.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/cache/driver/Lite.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/cache/driver/Memcache.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/cache/driver/Memcached.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/cache/driver/Redis.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/cache/driver/Sqlite.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/cache/driver/Wincache.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/cache/driver/Xcache.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/config/driver/Ini.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/config/driver/Json.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/config/driver/Xml.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/console/Command.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/console/Input.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/console/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/console/Output.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/console/Table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/console/bin/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/console/bin/hiddeninput.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/console/command/Build.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/console/command/Clear.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/console/command/Help.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/console/command/Lists.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/console/command/Make.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/console/command/RouteList.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/console/command/RunServer.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/console/command/Version.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/console/command/make/Command.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/console/command/make/Controller.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/console/command/make/Middleware.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/console/command/make/Model.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/console/command/make/Validate.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/console/command/make/stubs/command.stub" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/console/command/make/stubs/controller.api.stub" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/console/command/make/stubs/controller.plain.stub" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/console/command/make/stubs/controller.stub" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/console/command/make/stubs/middleware.stub" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/console/command/make/stubs/model.stub" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/console/command/make/stubs/validate.stub" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/console/command/optimize/Autoload.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/console/command/optimize/Config.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/console/command/optimize/Route.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/console/command/optimize/Schema.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/console/input/Argument.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/console/input/Definition.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/console/input/Option.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/console/output/Ask.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/console/output/Descriptor.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/console/output/Formatter.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/console/output/Question.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/console/output/descriptor/Console.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/console/output/driver/Buffer.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/console/output/driver/Console.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/console/output/driver/Nothing.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/console/output/formatter/Stack.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/console/output/formatter/Style.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/console/output/question/Choice.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/console/output/question/Confirmation.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/db/Builder.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/db/Connection.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/db/Expression.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/db/Query.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/db/Where.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/db/builder/Mysql.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/db/builder/Pgsql.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/db/builder/Sqlite.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/db/builder/Sqlsrv.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/db/connector/Mysql.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/db/connector/Pgsql.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/db/connector/Sqlite.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/db/connector/Sqlsrv.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/db/connector/code.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/db/connector/pgsql.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/db/exception/BindParamException.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/db/exception/DataNotFoundException.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/db/exception/ModelNotFoundException.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/debug/Console.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/debug/Html.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/exception/ClassNotFoundException.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/exception/DbException.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/exception/ErrorException.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/exception/Handle.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/exception/HttpException.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/exception/HttpResponseException.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/exception/PDOException.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/exception/RouteNotFoundException.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/exception/TemplateNotFoundException.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/exception/ThrowableError.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/exception/ValidateException.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/facade/App.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/facade/Build.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/facade/Cache.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/facade/Config.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/facade/Cookie.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/facade/Debug.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/facade/Env.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/facade/Hook.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/facade/Lang.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/facade/Log.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/facade/Middleware.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/facade/Request.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/facade/Response.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/facade/Route.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/facade/Session.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/facade/Template.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/facade/Url.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/facade/Validate.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/facade/View.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/log/driver/File.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/log/driver/Socket.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/log/driver/code.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/model/Collection.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/model/Pivot.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/model/Relation.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/model/code.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/model/concern/Attribute.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/model/concern/Conversion.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/model/concern/ModelEvent.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/model/concern/RelationShip.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/model/concern/SoftDelete.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/model/concern/TimeStamp.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/model/relation/BelongsTo.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/model/relation/BelongsToMany.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/model/relation/HasMany.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/model/relation/HasManyThrough.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/model/relation/HasOne.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/model/relation/MorphMany.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/model/relation/MorphOne.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/model/relation/MorphTo.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/model/relation/OneToOne.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/paginator/driver/Bootstrap.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/process/Builder.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/process/Utils.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/process/exception/Faild.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/process/exception/Failed.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/process/exception/Timeout.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/process/pipes/Pipes.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/process/pipes/Unix.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/process/pipes/Windows.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/response/Download.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/response/Json.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/response/Jsonp.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/response/Jump.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/response/Redirect.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/response/View.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/response/Xml.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/route/AliasRule.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/route/Dispatch.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/route/Domain.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/route/Resource.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/route/Rule.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/route/RuleGroup.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/route/RuleItem.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/route/RuleName.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/route/dispatch/Callback.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/route/dispatch/Controller.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/route/dispatch/Module.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/route/dispatch/Redirect.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/route/dispatch/Response.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/route/dispatch/Url.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/route/dispatch/View.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/session/driver/Memcache.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/session/driver/Memcached.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/session/driver/Redis.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/template/TagLib.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/template/driver/File.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/template/driver/code.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/template/taglib/Cx.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/validate/ValidateRule.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/view/driver/Php.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/view/driver/Think.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/think/view/driver/tpl.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/library/traits/controller/Jump.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/phpunit.xml.dist" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/tpl/default_index.tpl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/tpl/dispatch_jump.tpl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/tpl/page_trace.tpl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/tpl/stsoft.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/thinkphp/tpl/think_exception.tpl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/vendor/5ini99/think-addons/src/Addons.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/vendor/5ini99/think-addons/src/Controller.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/admin/controller/Base.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/admin/model/AdPositions.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/admin/model/Articles.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/admin/model/Informs.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/admin/model/Messages.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/admin/model/OrderComplains.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/admin/validate/Articles.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/admin/view/adpositions/adpositions.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/admin/view/articles/articles.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/admin/view/articles/edit.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/admin/view/attributes/attributes.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/admin/view/css/common.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/admin/view/css/index.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/admin/view/css/login.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/admin/view/goodscats/edit.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/admin/view/img/about_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/admin/view/img/about_2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/admin/view/img/about_3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/admin/view/img/about_4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/admin/view/img/about_8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/admin/view/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/admin/view/js/common.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/admin/view/main.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/admin/view/messages/list.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/admin/view/mobilebtns/mobilebtns.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/admin/view/shopstyles/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/admin/view/staffs/staffs.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/common.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/common/model/Attributes.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/common/model/Carts.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/common/model/Goods.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/common/model/OrderComplains.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/common/model/Orders.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/common/model/Tags.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/home/controller/Goods.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/home/controller/Index.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/home/controller/Ordercomplains.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/home/model/Goods.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/home/model/Shops.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/home/view/default/articles/news_view.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/home/view/default/brands_list.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/home/view/default/css/brandslist.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/home/view/default/css/carts.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/home/view/default/css/common.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/home/view/default/css/goods.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/home/view/default/css/goodslist.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/home/view/default/css/index.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/home/view/default/css/shop_floor.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/home/view/default/css/shopapply.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/home/view/default/css/shophome.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/home/view/default/css/user.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/home/view/default/footer.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/home/view/default/goods_detail.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/home/view/default/goods_list.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/home/view/default/header.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/home/view/default/img/apply.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/home/view/default/img/cnxh.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/home/view/default/img/coupon_bg.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/home/view/default/img/icon_gouwuche.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/home/view/default/img/img_icon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/home/view/default/img/index_distribute_bg.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/home/view/default/img/login.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/home/view/default/img/safe-rank.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/home/view/default/img/screenshot.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/home/view/default/img/shop_street_bg.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/home/view/default/img/ucount-icon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/home/view/default/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/home/view/default/js/common.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/home/view/default/js/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/home/view/default/shop_floor.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/home/view/default/shop_goods_list.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/home/view/default/shop_home.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/home/view/default/shop_join_step2.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/home/view/default/shop_join_step3.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/home/view/default/shop_street.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/home/view/default/top.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/home/view/default/users/base.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/home/view/default/users/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/home/view/default/users/messages/message.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/home/view/default/users/messages/show.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/home/view/default/users/orders/list_abnormal.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/home/view/default/users/orders/list_appraise.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/home/view/default/users/orders/list_cancel.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/home/view/default/users/orders/list_finish.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/home/view/default/users/orders/list_wait_pay.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/home/view/default/users/orders/list_wait_receive.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/home/view/default/users/orders/orders.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/home/view/default/users/user.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/home/view/default/users/user_edit.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/shop/controller/Ordercomplains.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/shop/model/GoodsConsult.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/shop/view/default/css/common.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/shop/view/default/css/index.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/shop/view/default/css/main.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/shop/view/default/goods/goods.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/shop/view/default/js/login.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/shop/view/default/orders/list_delivered.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/shop/view/default/orders/list_failure.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/shop/view/default/orders/list_finished.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/shop/view/default/orders/list_wait_delivery.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/shop/view/default/orders/list_wait_pay.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/shop/view/default/orders/orders.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/shop/view/default/users/user.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/upgrade/upgrade/wstmart/shop/view/default/users/user_edit.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wstmart/admin/view/css/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/wstmart/admin/view/css/login.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wstmart/admin/view/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/wstmart/admin/view/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wstmart/admin/view/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/wstmart/admin/view/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wstmart/admin/view/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/wstmart/admin/view/main.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wstmart/common.php" beforeDir="false" afterPath="$PROJECT_DIR$/wstmart/common.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wstmart/common/model/Tags.php" beforeDir="false" afterPath="$PROJECT_DIR$/wstmart/common/model/Tags.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wstmart/common/model/Users.php" beforeDir="false" afterPath="$PROJECT_DIR$/wstmart/common/model/Users.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wstmart/common/validate/UserAddress.php" beforeDir="false" afterPath="$PROJECT_DIR$/wstmart/common/validate/UserAddress.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wstmart/home/controller/Base.php" beforeDir="false" afterPath="$PROJECT_DIR$/wstmart/home/controller/Base.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wstmart/home/controller/Index.php" beforeDir="false" afterPath="$PROJECT_DIR$/wstmart/home/controller/Index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wstmart/api/controller/Appraises.php" beforeDir="false" afterPath="$PROJECT_DIR$/wstmart/api/controller/Appraises.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wstmart/api/model/Orders.php" beforeDir="false" afterPath="$PROJECT_DIR$/wstmart/api/model/Orders.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wstmart/common/model/GoodsAppraises.php" beforeDir="false" afterPath="$PROJECT_DIR$/wstmart/common/model/GoodsAppraises.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -519,8 +49,8 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="css" value="2" />
-          <entry key="html" value="11" />
-          <entry key="php" value="256" />
+          <entry key="html" value="12" />
+          <entry key="php" value="264" />
           <entry key="sql" value="1" />
           <entry key="tpl" value="1" />
         </counts>
@@ -528,8 +58,8 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CSS" value="2" />
-          <entry key="HTML" value="11" />
-          <entry key="PHP" value="256" />
+          <entry key="HTML" value="12" />
+          <entry key="PHP" value="264" />
           <entry key="SQL" value="1" />
           <entry key="Smarty" value="1" />
         </counts>
@@ -539,14 +69,14 @@
           <entry key="css" value="1" />
           <entry key="dummy" value="3" />
           <entry key="html" value="27" />
-          <entry key="php" value="5933" />
+          <entry key="php" value="5952" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="1" />
           <entry key="HTML" value="27" />
-          <entry key="PHP" value="5933" />
+          <entry key="PHP" value="5952" />
           <entry key="PLAIN_TEXT" value="3" />
         </counts>
       </usages-collector>
@@ -557,8 +87,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/wstmart/api/model/Orders.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="490">
-              <caret line="940" column="36" selection-start-line="940" selection-start-column="36" selection-end-line="940" selection-end-column="36" />
+            <state relative-caret-position="154">
+              <caret line="916" column="21" selection-start-line="916" selection-start-column="21" selection-end-line="916" selection-end-column="21" />
               <folding>
                 <element signature="e#35#48#0#PHP" expanded="true" />
               </folding>
@@ -569,8 +99,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/wstmart/api/controller/Order.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="349">
-              <caret line="154" column="37" selection-start-line="154" selection-start-column="37" selection-end-line="154" selection-end-column="37" />
+            <state relative-caret-position="461">
+              <caret line="218" column="56" lean-forward="true" selection-start-line="218" selection-start-column="56" selection-end-line="218" selection-end-column="56" />
               <folding>
                 <element signature="e#40#69#0#PHP" expanded="true" />
               </folding>
@@ -587,67 +117,62 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/wstmart/api/model/Goods.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="59">
+            <state relative-caret-position="-2377">
               <caret line="18" column="27" selection-start-line="18" selection-start-column="27" selection-end-line="18" selection-end-column="27" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/wstmart/home/controller/Orders.php">
+        <entry file="file://$PROJECT_DIR$/wstmart/home/controller/Goods.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="294">
-              <caret line="174" column="52" selection-start-line="174" selection-start-column="42" selection-end-line="174" selection-end-column="52" />
+            <state relative-caret-position="-7533" />
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/wstmart/home/view/default/goods_detail.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-8736" />
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/wstmart/api/controller/Appraises.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="321">
+              <caret line="41" column="27" selection-start-line="41" selection-start-column="20" selection-end-line="41" selection-end-column="27" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/wstmart/common/model/GoodsAppraises.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="406">
+              <caret line="269" column="22" selection-start-line="269" selection-start-column="18" selection-end-line="269" selection-end-column="22" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/wstmart/api/view/default/users/orders/box_reject.html">
+        <entry file="file://$PROJECT_DIR$/wstmart/home/controller/Goodsappraises.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="224">
-              <caret line="8" column="48" selection-start-line="8" selection-start-column="36" selection-end-line="8" selection-end-column="48" />
-              <folding>
-                <element signature="n#style#0;n#table#0;n#!!top" expanded="true" />
-              </folding>
+            <state relative-caret-position="56">
+              <caret line="2" column="29" selection-start-line="2" selection-start-column="29" selection-end-line="2" selection-end-column="29" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/wstmart/common/model/Orders.php">
+        <entry file="file://$PROJECT_DIR$/thinkphp/library/think/db/Query.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="1151" column="26" selection-start-line="1151" selection-start-column="26" selection-end-line="1151" selection-end-column="26" />
+            <state relative-caret-position="591">
+              <caret line="1747" column="20" selection-start-line="1747" selection-start-column="20" selection-end-line="1747" selection-end-column="20" />
             </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/wstmart/common.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="140">
-              <caret line="802" column="26" selection-start-line="802" selection-start-column="9" selection-end-line="802" selection-end-column="26" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/wstmart/home/view/default/users/orders/view.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="448">
-              <caret line="34" column="21" selection-start-line="34" selection-start-column="21" selection-end-line="34" selection-end-column="21" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/wstmart/api/controller/Orders.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-4704" />
           </provider>
         </entry>
       </file>
@@ -655,7 +180,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>for</find>
       <find>getCartMoney</find>
       <find>changeCartGoods</find>
       <find>throw</find>
@@ -683,8 +207,9 @@
       <find>ORDER_REJECT</find>
       <find>Request::instanc</find>
       <find>reject</find>
-      <find>n reject</find>
       <find>n l</find>
+      <find>n reject</find>
+      <find>all</find>
     </findStrings>
     <replaceStrings>
       <replace>shopReturn</replace>
@@ -726,7 +251,6 @@
         <option value="$PROJECT_DIR$/wstmart/admin/view/main.html" />
         <option value="$PROJECT_DIR$/wstmart/admin/view/index.html" />
         <option value="$PROJECT_DIR$/wstmart/api/controller/Orders.php" />
-        <option value="$PROJECT_DIR$/wstmart/api/controller/Appraises.php" />
         <option value="$PROJECT_DIR$/wstmart/api/model/GoodsCats.php" />
         <option value="$PROJECT_DIR$/wstmart/home/controller/Index.php" />
         <option value="$PROJECT_DIR$/wstmart/home/controller/Goods.php" />
@@ -747,9 +271,11 @@
         <option value="$PROJECT_DIR$/wstmart/home/controller/Base.php" />
         <option value="$PROJECT_DIR$/wstmart/api/model/Tools.php" />
         <option value="$PROJECT_DIR$/wstmart/api/controller/Index.php" />
-        <option value="$PROJECT_DIR$/wstmart/api/model/Orders.php" />
         <option value="$PROJECT_DIR$/wstmart/api/controller/Order.php" />
         <option value="$PROJECT_DIR$/wstmart/api/model/Goods.php" />
+        <option value="$PROJECT_DIR$/wstmart/api/model/Orders.php" />
+        <option value="$PROJECT_DIR$/wstmart/api/controller/Appraises.php" />
+        <option value="$PROJECT_DIR$/wstmart/common/model/GoodsAppraises.php" />
       </list>
     </option>
   </component>
@@ -793,7 +319,13 @@
               <item name="xn" type="b2602c69:ProjectViewProjectNode" />
               <item name="xn" type="462c0819:PsiDirectoryNode" />
               <item name="wstmart" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
+              <item name="home" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xn" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xn" type="462c0819:PsiDirectoryNode" />
+              <item name="wstmart" type="462c0819:PsiDirectoryNode" />
+              <item name="home" type="462c0819:PsiDirectoryNode" />
               <item name="controller" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -801,12 +333,6 @@
               <item name="xn" type="462c0819:PsiDirectoryNode" />
               <item name="wstmart" type="462c0819:PsiDirectoryNode" />
               <item name="home" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xn" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xn" type="462c0819:PsiDirectoryNode" />
-              <item name="wstmart" type="462c0819:PsiDirectoryNode" />
-              <item name="home" type="462c0819:PsiDirectoryNode" />
               <item name="view" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -825,16 +351,6 @@
               <item name="view" type="462c0819:PsiDirectoryNode" />
               <item name="default" type="462c0819:PsiDirectoryNode" />
               <item name="users" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xn" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xn" type="462c0819:PsiDirectoryNode" />
-              <item name="wstmart" type="462c0819:PsiDirectoryNode" />
-              <item name="home" type="462c0819:PsiDirectoryNode" />
-              <item name="view" type="462c0819:PsiDirectoryNode" />
-              <item name="default" type="462c0819:PsiDirectoryNode" />
-              <item name="users" type="462c0819:PsiDirectoryNode" />
-              <item name="orders" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -885,15 +401,15 @@
       <workItem from="1558838641001" duration="78940000" />
       <workItem from="1560174461007" duration="41421000" />
       <workItem from="1561216256073" duration="5177000" />
-      <workItem from="1561273136659" duration="7959000" />
+      <workItem from="1561273136659" duration="10822000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="234525000" />
+    <option name="totallyTimeSpent" value="237388000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-6" y="-6" width="1309" height="925" extended-state="6" />
+    <frame x="-6" y="-6" width="1309" height="925" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26059154" />
@@ -924,55 +440,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/wstmart/common/model/Carts.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="341" column="40" selection-start-line="341" selection-start-column="20" selection-end-line="341" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/wstmart/api/controller/Carts.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
-          <caret line="89" column="32" selection-start-line="89" selection-start-column="32" selection-end-line="89" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/wstmart/api/model/Carts.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
-          <caret line="351" column="16" selection-start-line="351" selection-start-column="13" selection-end-line="351" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/wstmart/home/controller/Useraddress.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="392">
-          <caret line="50" column="46" lean-forward="true" selection-start-line="50" selection-start-column="8" selection-end-line="50" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/wstmart/common/model/Areas.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="42" column="29" selection-start-line="42" selection-start-column="20" selection-end-line="42" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/thinkphp/library/think/Validate.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="28">
-          <caret line="58" column="15" selection-start-line="58" selection-start-column="9" selection-end-line="58" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/thinkphp/library/think/validate/ValidateRule.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="39" column="32" selection-start-line="39" selection-start-column="24" selection-end-line="39" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/wstmart/home/controller/Users.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-112">
@@ -1027,13 +494,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="364">
           <caret line="44" column="85" selection-start-line="44" selection-start-column="81" selection-end-line="44" selection-end-column="85" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/thinkphp/helper.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-263">
-          <caret line="116" column="47" selection-start-line="116" selection-start-column="39" selection-end-line="116" selection-end-column="47" />
         </state>
       </provider>
     </entry>
@@ -1246,10 +706,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/wstmart/api/controller/Goods.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="196" column="29" selection-start-line="196" selection-start-column="29" selection-end-line="196" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/wstmart/api/model/Orders.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="490">
-          <caret line="940" column="36" selection-start-line="940" selection-start-column="36" selection-end-line="940" selection-end-column="36" />
+        <state relative-caret-position="154">
+          <caret line="916" column="21" selection-start-line="916" selection-start-column="21" selection-end-line="916" selection-end-column="21" />
           <folding>
             <element signature="e#35#48#0#PHP" expanded="true" />
           </folding>
@@ -1258,25 +725,70 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/wstmart/api/controller/Order.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="349">
-          <caret line="154" column="37" selection-start-line="154" selection-start-column="37" selection-end-line="154" selection-end-column="37" />
+        <state relative-caret-position="461">
+          <caret line="218" column="56" lean-forward="true" selection-start-line="218" selection-start-column="56" selection-end-line="218" selection-end-column="56" />
           <folding>
             <element signature="e#40#69#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wstmart/api/controller/Goods.php">
+    <entry file="file://$PROJECT_DIR$/wstmart/api/model/Goods.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="196" column="29" selection-start-line="196" selection-start-column="29" selection-end-line="196" selection-end-column="29" />
+        <state relative-caret-position="-2377">
+          <caret line="18" column="27" selection-start-line="18" selection-start-column="27" selection-end-line="18" selection-end-column="27" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wstmart/api/model/Goods.php">
+    <entry file="file://$PROJECT_DIR$/wstmart/home/controller/Goods.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="59">
-          <caret line="18" column="27" selection-start-line="18" selection-start-column="27" selection-end-line="18" selection-end-column="27" />
+        <state relative-caret-position="-7533" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wstmart/home/view/default/goods_detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-8736" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wstmart/api/model/GoodsAppraises.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="18" column="6" selection-start-line="18" selection-start-column="6" selection-end-line="18" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/thinkphp/library/think/db/Query.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="591">
+          <caret line="1747" column="20" selection-start-line="1747" selection-start-column="20" selection-end-line="1747" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/thinkphp/helper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="28">
+          <caret line="387" column="13" selection-start-line="387" selection-start-column="13" selection-end-line="387" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wstmart/api/controller/Appraises.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="321">
+          <caret line="41" column="27" selection-start-line="41" selection-start-column="20" selection-end-line="41" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wstmart/home/controller/Goodsappraises.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="56">
+          <caret line="2" column="29" selection-start-line="2" selection-start-column="29" selection-end-line="2" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wstmart/common/model/GoodsAppraises.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="406">
+          <caret line="269" column="22" selection-start-line="269" selection-start-column="18" selection-end-line="269" selection-end-column="22" />
         </state>
       </provider>
     </entry>

@@ -247,9 +247,12 @@ class GoodsAppraises extends Base{
 	    }
 
 	}
-	/**
-	* 根据商品id取评论
-	*/
+
+    /**
+     * 根据商品id取评论
+     * @return array
+     * @throws \think\exception\DbException
+     */
 	public function getById(){
 		// 处理匿名
 		$anonymous = (int)input('anonymous',1);
@@ -282,7 +285,7 @@ class GoodsAppraises extends Base{
 					 ->where($where)
 					 ->where($filterWhere)
 					 ->order('ga.id desc')
-					 ->paginate(input('pagesize/d'))
+					 ->paginate(input('pagesize/d',10))
 					 ->toArray();
 		foreach($rs['data'] as $k=>$v){
 			// 格式化时间
@@ -306,9 +309,9 @@ class GoodsAppraises extends Base{
 		$rs['picNum'] = $eachApprNum['pic'];
 		$rs['sum'] = $eachApprNum['sum'];
 		if($rs!==false){
-			return WSTReturn('',1,$rs);
+			return shopReturn('',1,$rs);
 		}else{
-			return WSTReturn($this->getError(),-1);
+			return shopReturn($this->getError(),-1);
 		}
 	}
 	/**
