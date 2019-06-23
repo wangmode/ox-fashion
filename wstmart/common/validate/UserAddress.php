@@ -16,6 +16,7 @@ use think\Validate;
  */
 class UserAddress extends Validate{
 	protected $rule = [
+	    'addressId'=> 'require',
 		'areaId' => 'require',
 		'userAddress'  => 'require',
 		'userName' => 'require',
@@ -33,6 +34,6 @@ class UserAddress extends Validate{
 
     protected $scene = [
         'add'   =>  ['areaId','userAddress','userName','isDefault','userPhone'],
-        'edit'  =>  ['areaId','userAddress','userName','isDefault','userPhone'],
+        'edit'  =>  ['addressId','areaId','userAddress','userName','isDefault','userPhone'],
     ]; 
 }

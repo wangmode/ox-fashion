@@ -30,9 +30,15 @@ class Tags extends Base{
 		return $goods;
 
 	}
-	/**
-	 * 获取指定商品
-	 */
+
+    /**
+     * 获取指定商品
+     * @param $type
+     * @param int $catId
+     * @param $num
+     * @param int $cache
+     * @return array|\PDOStatement|string|\think\Collection
+     */
 	public function listGoods($type,$catId = 0,$num,$cache = 0){
 		$type = strtolower($type);
 		if(strtolower($type)=='history'){

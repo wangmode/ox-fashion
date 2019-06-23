@@ -15,6 +15,7 @@ namespace wstmart\home\controller;
  */
 use think\Controller;
 use think\Db;
+use wstmart\api\model\Tools;
 
 class Base extends Controller {
 	public function __construct(){
@@ -45,6 +46,7 @@ class Base extends Controller {
 	 * 上传图片
 	 */
 	public function uploadPic(){
+	    Tools::uploadPic(0);
         $this->checkAuth();
 		return WSTUploadPic(0);
 	}

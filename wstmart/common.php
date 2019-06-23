@@ -54,14 +54,34 @@ function WSTVerifyCheck($code){
 }
 /**
  * 生成数据返回值
+ * @param $msg
+ * @param int $status
+ * @param array $data
+ * @return array
  */
 function WSTReturn($msg,$status = -1,$data = []){
 	$rs = ['status'=>$status,'msg'=>$msg];
 	if(!empty($data))$rs['data'] = $data;
 	return $rs;
 }
+
+/**
+ * @param $msg
+ * @param int $code
+ * @param array $data
+ * @return array
+ */
+function shopReturn($msg,$code = 0,$data = []){
+    $rs = ['code'=>$code,'msg'=>$msg];
+    if(!empty($data))$rs['data'] = $data;
+    return $rs;
+}
 /**
  * 生成数据返回值
+ * @param $msg
+ * @param int $status
+ * @param array $data
+ * @return string
  */
 function jsonReturn($msg,$status = -1,$data = []){
 	if(isset($data['status']))return json_encode($data);
@@ -421,79 +441,10 @@ function WSTUploadPic($fromType=0){
     			$image->thumb($mWidth, $mHeight)->save($mSrc,$image->type(),90);
     			$image->thumb($mTWidth, $mTHeight, 2)->save($mThumb,$image->type(),90);
     		}
-
-
-    	}
-    	/***************************** 添加水印 ***********************************/
-    	$isWatermark=(int)input('isWatermark');
-    	if($isWatermark==1 && (int)WSTConf('CONF.watermarkPosition')!==0){
-	    	//取出水印配置
-	    	$wmWord = WSTConf('CONF.watermarkWord');//文字
-	    	$wmFile = trim(WSTConf('CONF.watermarkFile'),'/');//水印文件
-	    	//判断水印文件是否存在
-	    	if(!file_exists(WSTRootPath()."/".$wmFile))$wmFile = '';
-	    	$wmPosition = (int)WSTConf('CONF.watermarkPosition');//水印位置
-	    	$wmSize = ((int)WSTConf('CONF.watermarkSize')!=0)?WSTConf('CONF.watermarkSize'):'20';//大小
-	    	$wmColor = (WSTConf('CONF.watermarkColor')!='')?WSTConf('CONF.watermarkColor'):'#000000';//颜色必须是16进制的
-	    	$wmOpacity = ((int)WSTConf('CONF.watermarkOpacity')!=0)?WSTConf('CONF.watermarkOpacity'):'100';//水印透明度
-	    	//是否有自定义字体文件
-	    	$customTtf = Env::get('root_path').WSTConf('CONF.watermarkTtf');
-	    	$ttf = is_file($customTtf)?$customTtf:Env::get('extend_path').'verify/verify/ttfs/3.ttf';
-	        $image = \image\Image::open($imageSrc);
-	    	if(!empty($wmWord)){//当设置了文字水印 就一定会执行文字水印,不管是否设置了文件水印
-	    		// 文字偏移量
-	    		$offset = WSTConf('CONF.watermarkOffset');
-	    		if($offset!=''){
-	    			$offset = explode(',',str_replace('，', ',',$offset));
-	    			$offset = array_slice($offset,0,2);
-	    			$offset = array_map(function($val){return (int)$val;},$offset);
-	    			if(count($offset)<2)array_push($offset, 0);
-	    		}
-	    		//执行文字水印
-	    		$image->text($wmWord, $ttf, $wmSize, $wmColor, $wmPosition,$offset)->save($imageSrc);
-	    		if($thumbSrc!==null){
-	    			$image->thumb((int)input('width',min(300,$image->width())), (int)input('height',min(300,$image->height())),2)->save($thumbSrc,$image->type(),90);
-	    		}
-	    		//如果有生成手机版原图
-	    		if(!empty($mSrc)){
-	    			$image = \image\Image::open($imageSrc);
-	    			$image->thumb($mWidth, $mHeight)->save($mSrc,$image->type(),90);
-	    			$image->thumb($mTWidth, $mTHeight, 2)->save($mThumb,$image->type(),90);
-	    		}
-	    	}elseif(!empty($wmFile)){//设置了文件水印,并且没有设置文字水印
-	    		//执行图片水印
-	    		$image->water($wmFile, $wmPosition, $wmOpacity)->save($imageSrc);
-	    		if($thumbSrc!==null){
-	    			$image->thumb((int)input('width',min(300,$image->width())), (int)input('height',min(300,$image->height())),2)->save($thumbSrc,$image->type(),90);
-	    		}
-	    		//如果有生成手机版原图
-	    		if($mSrc!==null){
-	    			$image = \image\Image::open($imageSrc);
-	    			$image->thumb($mWidth, $mHeight)->save($mSrc,$image->type(),90);
-	    			$image->thumb($mTWidth, $mTHeight,2)->save($mThumb,$image->type(),90);
-	    		}
-	    	}
     	}
     	//判断是否有生成缩略图
     	$thumbSrc = ($thumbSrc==null)?$info->getFilename():str_replace('.','_thumb.', $info->getFilename());
 		$filePath = ltrim($filePath,'/');
-		// 用户头像上传宽高限制
-		$isCut = (int)input('isCut');
-		if($isCut){
-			$imgSrc = $filePath.$info->getFilename();
-			$image = \image\Image::open($imgSrc);
-			$size = $image->size();//原图宽高
-			$w = $size[0];
-			$h = $size[1];
-			$rate = $w/$h;
-			if($w>$h && $w>500){
-				$newH = 500/$rate;
-				$image->thumb(500, $newH)->save($imgSrc,$image->type(),90);
-			}elseif($h>$w && $h>500){
-				$newW = 500*$rate;
-				$image->thumb($newW, 500)->save($imgSrc,$image->type(),90);
-			}
-		}
 		$info=null;
 		$rdata = ['status'=>1,'savePath'=>$filePath,'name'=>$imgSrc,'thumb'=>$thumbSrc];
 		hook('afterUploadPic',['data'=>&$rdata,'isLocation'=>(int)input('isLocation')]);
@@ -503,6 +454,10 @@ function WSTUploadPic($fromType=0){
         return $file->getError();
     }    
 }
+
+
+
+
 /**
  * 上传文件
  */
@@ -1832,11 +1787,27 @@ function WSTWechat(){
 
 /**
  * 判断有没有权限
- * @param $code 权限代码
- * @param $type 返回的类型  true-boolean   false-string
+ * @param $code  //权限代码
+ * @return bool
  */
 function WSTGrant($code){
 	$STAFF = session("WST_STAFF");
 	if(in_array($code,$STAFF['privileges']))return true;
 	return false;
+}
+
+/**
+ * 生成完整链接
+ * @param $url string url地址
+ * @param $type int 链接类型
+ * @return mixed|string
+ */
+function formatUrl($url,$type=2){
+    $host = config('resourcePath');
+    if ($type==1){
+        $url = str_replace('/upload',$host.'upload',$url);
+    }else{
+        $url = $host.$url;
+    }
+    return $url;
 }
