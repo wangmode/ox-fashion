@@ -16,6 +16,7 @@ use wstmart\common\validate\GoodsAppraises as Validate;
  * 评价类
  */
 use think\Db;
+use think\facade\Request;
 class GoodsAppraises extends Model {
     /**
      * @param int $shopId
@@ -97,7 +98,26 @@ class GoodsAppraises extends Model {
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
      */
-	public function add($userId,$orderId,$goodsId,$orderGoodsId,$data,$goodsSpecId=0){
+	public function add($userId){
+        $validate = new Validate([
+            'orderId'          => 'require',
+            'goodsId'          => 'number',
+            'orderGoodsId'          => 'number'
+        ]);
+        $validate->message([
+            'orderId.require'          => '缺少参数:orderId!',
+            'goodsId.require'          => '格式错误:goodsId!',
+            'orderGoodsId .require'          => '格式错误:orderGoodsId!'
+        ]);
+        $data = Request::post();
+        if (!$validate->check($data)) {
+            return shopReturn($validate->getError(),0);
+        }
+        $goodsSpecId = isset($data['goodsSpecId'])?$data['goodsSpecId']:0;
+        $goodsId = $data['goodsId'];
+        $orderId = $data['orderId'];
+        $orderGoodsId= $data['orderGoodsId'];
+
 		// 没有传order_goods表的id
 		if($orderGoodsId==0)return shopReturn('数据出错,请联系管理员');
 		$goodsScore = $data['goodsScore'];
@@ -114,7 +134,7 @@ class GoodsAppraises extends Model {
 		if($orders['orderStatus']!=2)return shopReturn("订单状态已改变，请刷新订单后再尝试!");
 		//检测商品是否已评价
 		$apCount = $this->where(['orderGoodsId'=>$orderGoodsId,'dataFlag'=>1])->count();
-		if($apCount>0)return WSTReturn("该商品已评价!");
+		if($apCount>0)return shopReturn("该商品已评价!");
 		Db::startTrans();
 		try{	
 			//增加订单评价
@@ -237,14 +257,13 @@ class GoodsAppraises extends Model {
 
     /**
      * 根据商品id取评论
-     * @param $goodsId
-     * @param string $type
-     * @param int $anonymous
      * @return array
      * @throws \think\exception\DbException
      */
-	public function getById($goodsId,$type='best',$anonymous = 1){
-		// 处理匿名
+	public function getById(){
+        $anonymous = (int)input('anonymous',1);
+        $goodsId = (int)input('goodsId');
+        $type = input('type','all');
 		$where = ['ga.goodsId'=>$goodsId,
 				  'ga.dataFlag'=>1,
 				  'ga.isShow'=>1];

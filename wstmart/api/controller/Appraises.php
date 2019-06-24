@@ -1,5 +1,6 @@
 <?php
 namespace wstmart\api\controller;
+use think\Request;
 use wstmart\api\model\GoodsAppraises;
 /**
  * ============================================================================
@@ -41,9 +42,8 @@ class Appraises extends Base{
 	*/
 	public function getById(){
         $GoodsAppraises = new GoodsAppraises();
-        $userId = $this->getUserId();
         try{
-            $rs = $GoodsAppraises->getById($userId);
+            $rs = $GoodsAppraises->getById();
             $this->response($rs);
         }catch (\think\exception $exception){
             $this->response(0,$exception->getMessage());
