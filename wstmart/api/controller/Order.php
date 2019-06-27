@@ -134,6 +134,22 @@ class Order extends Base{
         }
     }
 
+    public function cancel_reason()
+    {
+        $reason = WSTDatas('ORDER_CANCEL');
+        $this->response(1,'取消理由！',$reason);
+    }
+
+    /**
+     * 用户取消订单
+     */
+    public function cancellation(){
+        $Orders = new Orders();
+        $userId = $this->getUserId();
+        $rs = $Orders->cancel($userId);
+        return $rs;
+    }
+
 	/**
 	 * 已取消订单waitPay
 	 */

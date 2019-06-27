@@ -23,14 +23,26 @@ class Index extends Base{
         $this->response(1,'推荐商品！',$goods);
     }
 
+    //搜索关键词
+    public function keyword_list(){
+        $keywords = WSTSearchKeys();
+        $this->response(1,'搜索关键词！',$keywords);
+    }
+
     //新品列表
     public function new_list(){
         $Tags = new Tags();
+        $new_ad_list =  $Tags->listAds('day-new',3,0);
+        foreach ($new_ad_list as $k=>$v){
+            $new_ad_list[$k]['adFile'] = formatUrl($v['adFile'],2);
+        }
         $goods = $Tags->listGoods('new',0,10);
         foreach ($goods as $kk=>$vv){
             $goods[$kk]['goodsImg'] = formatUrl($vv['goodsImg'],2);
         }
-        $this->response(1,',新品列表！',$goods);
+        $list['ad'] = $new_ad_list;
+        $list['goods'] = $goods;
+        $this->response(1,',新品列表！',$list);
     }
 
     public function chosen_list(){
