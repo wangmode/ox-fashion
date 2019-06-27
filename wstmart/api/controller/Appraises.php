@@ -26,16 +26,19 @@ class Appraises extends Base{
         }catch (\think\exception $exception){
             $this->response(0,$exception->getMessage());
         }
-
 	}
 	/**
 	* 添加评价
 	*/
 	public function add(){
-		$m = new M();
-		$rs = $m->add();
-		return $rs;
-
+        $GoodsAppraises = new GoodsAppraises();
+        $userId = $this->getUserId();
+        try{
+            $rs = $GoodsAppraises->add($userId);
+            $this->response($rs);
+        }catch (\think\exception $exception){
+            $this->response(0,$exception->getMessage());
+        }
 	}
 	/**
 	* 根据商品id取评论

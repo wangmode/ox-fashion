@@ -88,11 +88,6 @@ class GoodsAppraises extends Model {
     /**
      * 添加评价
      * @param $userId
-     * @param $orderId
-     * @param $goodsId
-     * @param $orderGoodsId
-     * @param $data
-     * @param int $goodsSpecId
      * @return array
      * @throws \think\db\exception\DataNotFoundException
      * @throws \think\db\exception\ModelNotFoundException
