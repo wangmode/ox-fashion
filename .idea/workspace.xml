@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="533a86bb-c11e-4d4c-9955-56eda6bf252a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/wstmart/api/controller/Index.php" beforeDir="false" afterPath="$PROJECT_DIR$/wstmart/api/controller/Index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wstmart/api/controller/Carts.php" beforeDir="false" afterPath="$PROJECT_DIR$/wstmart/api/controller/Carts.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wstmart/api/controller/Order.php" beforeDir="false" afterPath="$PROJECT_DIR$/wstmart/api/controller/Order.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wstmart/api/model/Orders.php" beforeDir="false" afterPath="$PROJECT_DIR$/wstmart/api/model/Orders.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -48,8 +49,9 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="css" value="2" />
-          <entry key="html" value="16" />
-          <entry key="php" value="272" />
+          <entry key="gitignore" value="1" />
+          <entry key="html" value="17" />
+          <entry key="php" value="284" />
           <entry key="sql" value="1" />
           <entry key="tpl" value="1" />
         </counts>
@@ -57,8 +59,9 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CSS" value="2" />
-          <entry key="HTML" value="16" />
-          <entry key="PHP" value="272" />
+          <entry key="HTML" value="17" />
+          <entry key="PHP" value="284" />
+          <entry key="PLAIN_TEXT" value="1" />
           <entry key="SQL" value="1" />
           <entry key="Smarty" value="1" />
         </counts>
@@ -67,27 +70,28 @@
         <counts>
           <entry key="css" value="1" />
           <entry key="dummy" value="3" />
+          <entry key="gitignore" value="7" />
           <entry key="html" value="27" />
-          <entry key="php" value="6171" />
+          <entry key="php" value="6306" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="1" />
           <entry key="HTML" value="27" />
-          <entry key="PHP" value="6171" />
-          <entry key="PLAIN_TEXT" value="3" />
+          <entry key="PHP" value="6306" />
+          <entry key="PLAIN_TEXT" value="10" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/wstmart/api/model/Orders.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="182">
-              <caret line="828" column="51" selection-start-line="828" selection-start-column="44" selection-end-line="828" selection-end-column="51" />
+            <state relative-caret-position="882">
+              <caret line="1035" column="84" selection-start-line="1035" selection-start-column="84" selection-end-line="1035" selection-end-column="84" />
               <folding>
                 <element signature="e#35#48#0#PHP" expanded="true" />
               </folding>
@@ -95,14 +99,77 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/wstmart/api/controller/Order.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="322">
-              <caret line="142" column="7" lean-forward="true" selection-start-line="142" selection-start-column="7" selection-end-line="142" selection-end-column="7" />
+            <state relative-caret-position="238">
+              <caret line="259" column="31" lean-forward="true" selection-start-line="259" selection-start-column="31" selection-end-line="259" selection-end-column="31" />
               <folding>
                 <element signature="e#40#69#0#PHP" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/wstmart/api/controller/Carts.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="252">
+              <caret line="54" column="18" selection-start-line="54" selection-start-column="18" selection-end-line="54" selection-end-column="18" />
+              <folding>
+                <element signature="e#40#73#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/wstmart/api/view/default/settlement.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1190">
+              <caret line="123" column="29" selection-start-line="123" selection-start-column="13" selection-end-line="123" selection-end-column="29" />
+              <folding>
+                <element signature="n#style#0;n#div#1;n#div#0;n#div#7;n#div#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/wstmart/common.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="140">
+              <caret line="1243" column="7" selection-start-line="1243" selection-start-column="7" selection-end-line="1243" selection-end-column="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/wstmart/api/controller/Address.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="252">
+              <caret line="27" column="37" selection-start-line="27" selection-start-column="8" selection-end-line="27" selection-end-column="37" />
+              <folding>
+                <element signature="e#40#74#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/wstmart/api/model/Carts.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="247">
+              <caret line="156" column="59" selection-start-line="156" selection-start-column="52" selection-end-line="156" selection-end-column="59" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/wstmart/api/model/Goods.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="933">
+              <caret line="58" column="15" selection-start-line="58" selection-start-column="12" selection-end-line="58" selection-end-column="15" />
             </state>
           </provider>
         </entry>
@@ -128,73 +195,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/wstmart/api/model/GoodsAppraises.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="337">
-              <caret line="119" lean-forward="true" selection-start-line="119" selection-end-line="119" />
-              <folding>
-                <element signature="e#575#588#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/wstmart/api/controller/Index.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="28">
-              <caret line="32" column="28" selection-start-line="32" selection-start-column="20" selection-end-line="32" selection-end-column="28" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/wstmart/api/controller/Base.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="280">
-              <caret line="57" lean-forward="true" selection-start-line="57" selection-end-line="57" />
-              <folding>
-                <element signature="e#40#59#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/wstmart/api/view/default/index.html">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/wstmart/api/view/default/header.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="27" column="38" selection-start-line="27" selection-start-column="25" selection-end-line="27" selection-end-column="38" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/wstmart/common.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="140">
-              <caret line="1582" column="22" selection-start-line="1582" selection-start-column="9" selection-end-line="1582" selection-end-column="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>getQuickCarts</find>
-      <find>batchChangeCartGoods</find>
-      <find>listQuery</find>
-      <find>isEmail</find>
-      <find>waitPay</find>
-      <find>area</find>
-      <find>listBrand</find>
       <find>getStatusNum</find>
       <find>Request::instance()</find>
       <find>quickLogin</find>
@@ -218,6 +222,13 @@
       <find>WSTSearchKeys</find>
       <find>n reject</find>
       <find>n can</find>
+      <find>n getDefaultAddress(</find>
+      <find>userOrderMoney</find>
+      <find>n WSTPositiveNum(</find>
+      <find>$this-&gt;assign(&quot;shopFreight</find>
+      <find>$freight</find>
+      <find>$shopFreight</find>
+      <find>$orders['g</find>
     </findStrings>
     <replaceStrings>
       <replace>shopReturn</replace>
@@ -233,7 +244,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/wstmart/api/controller/Login.php" />
         <option value="$PROJECT_DIR$/../ApiAdmin/config/cache.php" />
         <option value="$PROJECT_DIR$/../ApiAdmin/thinkphp/library/think/db/connector/pgsql.sql" />
         <option value="$PROJECT_DIR$/wstmart/util/Strs.php" />
@@ -264,7 +274,6 @@
         <option value="$PROJECT_DIR$/wstmart/common/validate/UserAddress.php" />
         <option value="$PROJECT_DIR$/wstmart/api/model/UserAddress.php" />
         <option value="$PROJECT_DIR$/wstmart/api/model/Carts.php" />
-        <option value="$PROJECT_DIR$/wstmart/api/controller/Carts.php" />
         <option value="$PROJECT_DIR$/wstmart/common/model/Users.php" />
         <option value="$PROJECT_DIR$/wstmart/common/model/Users - 副本.php" />
         <option value="$PROJECT_DIR$/wstmart/api/model/Areas.php" />
@@ -278,12 +287,14 @@
         <option value="$PROJECT_DIR$/wstmart/home/controller/Base.php" />
         <option value="$PROJECT_DIR$/wstmart/api/model/Tools.php" />
         <option value="$PROJECT_DIR$/wstmart/api/model/Goods.php" />
-        <option value="$PROJECT_DIR$/wstmart/api/model/Orders.php" />
         <option value="$PROJECT_DIR$/wstmart/common/model/GoodsAppraises.php" />
         <option value="$PROJECT_DIR$/wstmart/api/controller/Appraises.php" />
         <option value="$PROJECT_DIR$/wstmart/api/model/GoodsAppraises.php" />
         <option value="$PROJECT_DIR$/wstmart/api/controller/Index.php" />
+        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/wstmart/api/controller/Order.php" />
+        <option value="$PROJECT_DIR$/wstmart/api/controller/Carts.php" />
+        <option value="$PROJECT_DIR$/wstmart/api/model/Orders.php" />
       </list>
     </option>
   </component>
@@ -293,7 +304,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-12" />
     <option name="y" value="-12" />
     <option name="width" value="1390" />
@@ -335,6 +346,13 @@
               <item name="xn" type="462c0819:PsiDirectoryNode" />
               <item name="wstmart" type="462c0819:PsiDirectoryNode" />
               <item name="api" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xn" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xn" type="462c0819:PsiDirectoryNode" />
+              <item name="wstmart" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
               <item name="view" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -344,49 +362,6 @@
               <item name="api" type="462c0819:PsiDirectoryNode" />
               <item name="view" type="462c0819:PsiDirectoryNode" />
               <item name="default" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xn" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xn" type="462c0819:PsiDirectoryNode" />
-              <item name="wstmart" type="462c0819:PsiDirectoryNode" />
-              <item name="common" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xn" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xn" type="462c0819:PsiDirectoryNode" />
-              <item name="wstmart" type="462c0819:PsiDirectoryNode" />
-              <item name="common" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xn" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xn" type="462c0819:PsiDirectoryNode" />
-              <item name="wstmart" type="462c0819:PsiDirectoryNode" />
-              <item name="home" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xn" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xn" type="462c0819:PsiDirectoryNode" />
-              <item name="wstmart" type="462c0819:PsiDirectoryNode" />
-              <item name="home" type="462c0819:PsiDirectoryNode" />
-              <item name="view" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xn" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xn" type="462c0819:PsiDirectoryNode" />
-              <item name="wstmart" type="462c0819:PsiDirectoryNode" />
-              <item name="home" type="462c0819:PsiDirectoryNode" />
-              <item name="view" type="462c0819:PsiDirectoryNode" />
-              <item name="default" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xn" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xn" type="462c0819:PsiDirectoryNode" />
-              <item name="wstmart" type="462c0819:PsiDirectoryNode" />
-              <item name="home" type="462c0819:PsiDirectoryNode" />
-              <item name="view" type="462c0819:PsiDirectoryNode" />
-              <item name="default" type="462c0819:PsiDirectoryNode" />
-              <item name="users" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -437,15 +412,15 @@
       <workItem from="1558838641001" duration="78940000" />
       <workItem from="1560174461007" duration="41421000" />
       <workItem from="1561216256073" duration="5177000" />
-      <workItem from="1561273136659" duration="23340000" />
+      <workItem from="1561273136659" duration="34666000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="249906000" />
+    <option name="totallyTimeSpent" value="261232000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-6" y="-6" width="1309" height="925" extended-state="7" />
+    <frame x="-6" y="-6" width="1309" height="925" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26059154" />
@@ -476,48 +451,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/wstmart/common/validate/UserAddress.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="868">
-          <caret line="31" column="18" selection-start-line="31" selection-start-column="9" selection-end-line="31" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../cmf51/vendor/thinkcmf/cmf-app/src/admin/controller/MenuController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-10472">
-          <caret line="30" column="26" lean-forward="true" selection-start-line="30" selection-start-column="26" selection-end-line="30" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../cmf51/vendor/thinkcmf/cmf-app/src/admin/model/AdminMenuModel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="589">
-          <caret line="111" selection-start-line="111" selection-end-line="159" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/wstmart/api/model/Areas.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="82" column="8" selection-start-line="82" selection-start-column="8" selection-end-line="82" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../cmf51/vendor/thinkcmf/cmf-app/src/admin/controller/IndexController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="364">
-          <caret line="44" column="85" selection-start-line="44" selection-start-column="81" selection-end-line="44" selection-end-column="85" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/wstmart/api/controller/Brands.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="29" column="29" selection-start-line="29" selection-start-column="29" selection-end-line="29" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/wstmart/common/model/Brands.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="239">
@@ -550,13 +483,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="241">
           <caret line="786" column="9" selection-start-line="786" selection-start-column="9" selection-end-line="786" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/wstmart/api/controller/Address.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="21" selection-start-line="21" selection-end-line="21" />
         </state>
       </provider>
     </entry>
@@ -681,13 +607,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wstmart/api/controller/Goods.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="196" column="29" selection-start-line="196" selection-start-column="29" selection-end-line="196" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/wstmart/home/view/default/goods_detail.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-8736" />
@@ -717,13 +636,6 @@
     <entry file="file://$PROJECT_DIR$/wstmart/home/controller/Goods.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-7533" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/wstmart/api/model/Goods.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8680">
-          <caret line="312" column="83" lean-forward="true" selection-start-line="312" selection-start-column="83" selection-end-line="312" selection-end-column="83" />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/wstmart/common/model/GoodsAppraises.php">
@@ -768,13 +680,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wstmart/common.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="1582" column="22" selection-start-line="1582" selection-start-column="9" selection-end-line="1582" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/wstmart/api/model/Users.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
@@ -802,16 +707,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wstmart/api/model/Orders.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="828" column="51" selection-start-line="828" selection-start-column="44" selection-end-line="828" selection-end-column="51" />
-          <folding>
-            <element signature="e#35#48#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/wstmart/api/controller/Orders.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="308">
@@ -829,12 +724,101 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="4" column="2" selection-start-line="4" selection-start-column="2" selection-end-line="4" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wstmart/api/controller/Goods.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="518">
+          <caret line="196" column="31" selection-start-line="196" selection-start-column="31" selection-end-line="196" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wstmart/api/model/Goods.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="933">
+          <caret line="58" column="15" selection-start-line="58" selection-start-column="12" selection-end-line="58" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wstmart/home/controller/Carts.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="81" selection-start-line="81" selection-end-line="117" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wstmart/api/model/UserAddress.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="213" column="20" selection-start-line="213" selection-start-column="20" selection-end-line="213" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wstmart/api/controller/Address.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="27" column="37" selection-start-line="27" selection-start-column="8" selection-end-line="27" selection-end-column="37" />
+          <folding>
+            <element signature="e#40#74#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wstmart/common.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="1243" column="7" selection-start-line="1243" selection-start-column="7" selection-end-line="1243" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wstmart/api/model/Carts.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="156" column="59" selection-start-line="156" selection-start-column="52" selection-end-line="156" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wstmart/api/view/default/settlement.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1190">
+          <caret line="123" column="29" selection-start-line="123" selection-start-column="13" selection-end-line="123" selection-end-column="29" />
+          <folding>
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#7;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wstmart/api/controller/Carts.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="54" column="18" selection-start-line="54" selection-start-column="18" selection-end-line="54" selection-end-column="18" />
+          <folding>
+            <element signature="e#40#73#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/wstmart/api/controller/Order.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="142" column="7" lean-forward="true" selection-start-line="142" selection-start-column="7" selection-end-line="142" selection-end-column="7" />
+        <state relative-caret-position="238">
+          <caret line="259" column="31" lean-forward="true" selection-start-line="259" selection-start-column="31" selection-end-line="259" selection-end-column="31" />
           <folding>
             <element signature="e#40#69#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wstmart/api/model/Orders.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="882">
+          <caret line="1035" column="84" selection-start-line="1035" selection-start-column="84" selection-end-line="1035" selection-end-column="84" />
+          <folding>
+            <element signature="e#35#48#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>

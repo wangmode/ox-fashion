@@ -4,6 +4,7 @@ use wstmart\api\model\Carts as M;
 use wstmart\common\model\Payments as PM;
 use think\Validate;
 use think\Exception;
+use wstmart\api\model\UserAddress;
 /**
  * ============================================================================
  * WSTMart多用户商城
@@ -48,6 +49,47 @@ class Carts extends Base{
             $this->response(0,$e->getMessage());
         }
 	}
+
+    public function settlement(){
+        $m = new M();
+        //获取一个用户地址
+        $userAddress = new UserAddress();
+        $userId = $this->getUserId();
+        $address = $userAddress->getDefaultAddress($userId);
+
+        //获取省份
+        //$areas = model('Areas')->listQuery();
+        //$this->assign('areaList',$areas);
+        //获取支付方式
+        $pm = new PM();
+        $payments = $pm->getByGroup('1');
+        $carts = $m->getCarts(true,$userId);
+        if(empty($carts['carts'])){
+            $this->response(0,'Sorry~您还未选择商品。。。');
+        }
+        hook("homeControllerCartsSettlement",["carts"=>$carts,"payments"=>&$payments]);
+
+        //$this->assign('carts',$carts);
+        //$this->assign('payments',$payments);
+        $shopFreight = 0;
+        foreach ($carts['carts'] as $k=>$v){
+            if($v['isFreeShipping']){
+                $freight = 0;
+            }else{
+                if(!empty($address)){
+                    $freight = WSTOrderFreight($v['shopId'],$address['areaId2']);
+                }else{
+                    $freight = 0;
+                }
+            }
+            $shopFreight = $shopFreight + $freight;
+        }
+        $data['address'] = $address;
+        $data['carts'] = $carts;
+        $data['payments'] = $payments;
+        $data['shopFreight'] = $shopFreight;
+        $this->response(1,'结算信息！',$data);
+    }
 
     /**
      * 购物车列表

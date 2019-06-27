@@ -146,8 +146,12 @@ class Order extends Base{
     public function cancellation(){
         $Orders = new Orders();
         $userId = $this->getUserId();
-        $rs = $Orders->cancel($userId);
-        return $rs;
+        try{
+            $rs = $Orders->cancel($userId);
+            $this->response($rs);
+        }catch (\think\exception $exception){
+            $this->response(0,$exception->getMessage());
+        }
     }
 
 	/**

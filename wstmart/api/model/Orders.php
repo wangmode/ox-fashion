@@ -819,98 +819,111 @@ class Orders extends Model{
     /**
      * 用户取消订单
      * @param $userId
-     * @param $orderId
-     * @param $reason
      * @return array
      * @throws \think\db\exception\DataNotFoundException
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
      */
-	public function cancel($userId,$orderId,$reason){
-		hook('beforeCancelOrder',['orderId'=>$orderId]);
-		$order = $this->alias('o')->join('__SHOPS__ s','o.shopId=s.shopId','left')
-		              ->where([['o.orderStatus','in',[-2,0]],['o.userId','=',$userId],['o.orderId','=',$orderId]])
-		              ->field('o.orderId,o.orderNo,s.userId,s.shopId,o.orderCode,o.isPay,o.orderType,o.payType,o.orderStatus,o.useScore,o.scoreMoney,o.realTotalMoney')->find();
-		$reasonData = WSTDatas('ORDER_CANCEL',$reason);
-		if(empty($reasonData))return shopReturn("无效的取消原因");
-		if(!empty($order)){
-			Db::startTrans();
-		    try{
-				$data = ['orderStatus'=>-1,'cancelReason'=>$reason];
-				//把实付金额设置为0
-				if($order['payType']==0 || ($order['payType']==1 && $order['isPay']==0))$data['realTotalMoney'] = 0;
-			    $result = $this->where('orderId',$order['orderId'])->update($data);
-				if(false != $result){
+    public function cancel($userId){
+        $validate = new Validate([
+            'orderId'          => 'require',
+            'reason_id'          => 'number'
+        ]);
+        $validate->message([
+            'orderId.require'          => '缺少参数:orderId!',
+            'reason_id.require'          => '格式错误:reason_id!'
+        ]);
+        $data = Request::post();
+        if (!$validate->check($data)) {
+            return shopReturn($validate->getError(),0);
+        }
+        $orderId = $data['orderId'];
+        $reason_id = $data['reason_id'];
+        hook('beforeCancelOrder',['orderId'=>$orderId]);
+
+        $order = $this->alias('o')->join('__SHOPS__ s','o.shopId=s.shopId','left')
+            ->where([['o.orderStatus','in',[-2,0]],['o.userId','=',$userId],['o.orderId','=',$orderId]])
+            ->field('o.orderId,o.orderNo,s.userId,s.shopId,o.orderCode,o.isPay,o.orderType,o.payType,o.orderStatus,o.useScore,o.scoreMoney,o.realTotalMoney')->find();
+        $reasonData = WSTDatas('ORDER_CANCEL',$reason_id);
+        if(empty($reasonData))return shopReturn("无效的取消原因");
+        if(!empty($order)){
+            Db::startTrans();
+            try{
+                $data = ['orderStatus'=>-1,'cancelReason'=>$reason_id];
+                //把实付金额设置为0
+                if($order['payType']==0 || ($order['payType']==1 && $order['isPay']==0))$data['realTotalMoney'] = 0;
+                $result = $this->where('orderId',$order['orderId'])->update($data);
+                if(false != $result){
                     //正常订单商品库存处理
                     $goods = Db::name('order_goods')->alias('og')->join('__GOODS__ g','og.goodsId=g.goodsId','inner')
-						           ->where('orderId',$orderId)->field('og.*,g.isSpec')->select();
+                        ->where('orderId',$orderId)->field('og.*,g.isSpec')->select();
                     //返还商品库存
-					foreach ($goods as $key => $v){
-						//处理虚拟产品
-						if($v['goodsType']==1){
-	                        $extraJson = json_decode($v['extraJson'],true);
-	                        foreach ($extraJson as  $ecard) {
-	                            Db::name('goods_virtuals')->where('id',$ecard['cardId'])->update(['orderId'=>0,'orderNo'=>'','isUse'=>0]);
-	                        }
-	                        $counts = Db::name('goods_virtuals')->where(['dataFlag'=>1,'goodsId'=>$v['goodsId'],'isUse'=>0])->count();
-	                        Db::name('goods')->where('goodsId',$v['goodsId'])->setField('goodsStock',$counts);
-						}else{
-							if($order['orderCode']=='order'){
-								//修改库存
-								if($v['isSpec']>0){
-							        Db::name('goods_specs')->where('id',$v['goodsSpecId'])->setInc('specStock',$v['goodsNum']);
-								}
-								Db::name('goods')->where('goodsId',$v['goodsId'])->setInc('goodsStock',$v['goodsNum']);
-							}
-						}
+                    foreach ($goods as $key => $v){
+                        //处理虚拟产品
+                        if($v['goodsType']==1){
+                            $extraJson = json_decode($v['extraJson'],true);
+                            foreach ($extraJson as  $ecard) {
+                                Db::name('goods_virtuals')->where('id',$ecard['cardId'])->update(['orderId'=>0,'orderNo'=>'','isUse'=>0]);
+                            }
+                            $counts = Db::name('goods_virtuals')->where(['dataFlag'=>1,'goodsId'=>$v['goodsId'],'isUse'=>0])->count();
+                            Db::name('goods')->where('goodsId',$v['goodsId'])->setField('goodsStock',$counts);
+                        }else{
+                            if($order['orderCode']=='order'){
+                                //修改库存
+                                if($v['isSpec']>0){
+                                    Db::name('goods_specs')->where('id',$v['goodsSpecId'])->setInc('specStock',$v['goodsNum']);
+                                }
+                                Db::name('goods')->where('goodsId',$v['goodsId'])->setInc('goodsStock',$v['goodsNum']);
+                            }
+                        }
                     }
-					
-					//新增订单日志
-					$logOrder = [];
-					$logOrder['orderId'] = $orderId;
-					$logOrder['orderStatus'] = -1;
-					$logOrder['logContent'] = "用户取消订单，取消原因：".$reasonData['dataName'];
-					$logOrder['logUserId'] = $userId;
-					$logOrder['logType'] = 0;
-					$logOrder['logTime'] = date('Y-m-d H:i:s');
-					Db::name('log_orders')->insert($logOrder);
-					//提交订单后执行钩子
-					hook('afterCancelOrder',['orderId'=>$orderId]);
-					//发送一条商家信息
-					$tpl = WSTMsgTemplates('ORDER_CANCEL');
-	                if( $tpl['tplContent']!='' && $tpl['status']=='1'){
-	                    $find = ['${ORDER_NO}','${REASON}'];
-	                    $replace = [$order['orderNo'],$reasonData['dataName']];
-	                   
-	                	$msg = array();
-			            $msg["shopId"] = $order["shopId"];
-			            $msg["tplCode"] = $tpl["tplCode"];
-			            $msg["msgType"] = 1;
-			            $msg["content"] = str_replace($find,$replace,$tpl['tplContent']);
-			            $msg["msgJson"] = ['from'=>1,'dataId'=>$orderId];
-			            model("common/MessageQueues")->add($msg);
-	                }
-	                //判断是否需要发送管理员短信
-					$tpl = WSTMsgTemplates('PHONE_ADMIN_CANCEL_ORDER');
-					if((int)WSTConf('CONF.smsOpen')==1 && (int)WSTConf('CONF.smsCancelOrderTip')==1 &&  $tpl['tplContent']!='' && $tpl['status']=='1'){
-						$params = ['tpl'=>$tpl,'params'=>['ORDER_NO'=>$order['orderNo']]];
-						$staffs = Db::name('staffs')->where([['staffId','in',explode(',',WSTConf('CONF.cancelOrderTipUsers'))],['staffStatus','=',1],['dataFlag','=',1]])->field('staffPhone')->select();
-						for($i=0;$i<count($staffs);$i++){
-							if($staffs[$i]['staffPhone']=='')continue;
-							$m = new LogSms();
-							$rv = $m->sendAdminSMS(0,$staffs[$i]['staffPhone'],$params,'cancel','');
-						}
-					}
-					Db::commit();
-					return shopReturn('订单取消成功',1);
-				}
-			}catch (\Exception $e) {
-		        Db::rollback();
-	            return shopReturn('操作失败',-1);
-	        }
-		}
-		return shopReturn('操作失败，请检查订单状态是否已改变');
-	}
+
+                    //新增订单日志
+                    $logOrder = [];
+                    $logOrder['orderId'] = $orderId;
+                    $logOrder['orderStatus'] = -1;
+                    $logOrder['logContent'] = "用户取消订单，取消原因：".$reasonData['dataName'];
+                    $logOrder['logUserId'] = $userId;
+                    $logOrder['logType'] = 0;
+                    $logOrder['logTime'] = date('Y-m-d H:i:s');
+                    Db::name('log_orders')->insert($logOrder);
+                    //提交订单后执行钩子
+                    hook('afterCancelOrder',['orderId'=>$orderId]);
+                    //发送一条商家信息
+                    $tpl = WSTMsgTemplates('ORDER_CANCEL');
+                    if( $tpl['tplContent']!='' && $tpl['status']=='1'){
+                        $find = ['${ORDER_NO}','${REASON}'];
+                        $replace = [$order['orderNo'],$reasonData['dataName']];
+
+                        $msg = array();
+                        $msg["shopId"] = $order["shopId"];
+                        $msg["tplCode"] = $tpl["tplCode"];
+                        $msg["msgType"] = 1;
+                        $msg["content"] = str_replace($find,$replace,$tpl['tplContent']);
+                        $msg["msgJson"] = ['from'=>1,'dataId'=>$orderId];
+                        model("common/MessageQueues")->add($msg);
+                    }
+                    //判断是否需要发送管理员短信
+                    $tpl = WSTMsgTemplates('PHONE_ADMIN_CANCEL_ORDER');
+                    if((int)WSTConf('CONF.smsOpen')==1 && (int)WSTConf('CONF.smsCancelOrderTip')==1 &&  $tpl['tplContent']!='' && $tpl['status']=='1'){
+                        $params = ['tpl'=>$tpl,'params'=>['ORDER_NO'=>$order['orderNo']]];
+                        $staffs = Db::name('staffs')->where([['staffId','in',explode(',',WSTConf('CONF.cancelOrderTipUsers'))],['staffStatus','=',1],['dataFlag','=',1]])->field('staffPhone')->select();
+                        for($i=0;$i<count($staffs);$i++){
+                            if($staffs[$i]['staffPhone']=='')continue;
+                            $m = new LogSms();
+                            $rv = $m->sendAdminSMS(0,$staffs[$i]['staffPhone'],$params,'cancel','');
+                        }
+                    }
+                    Db::commit();
+                    return shopReturn('订单取消成功',1);
+                }
+            }catch (\Exception $e) {
+                Db::rollback();
+                return shopReturn('操作失败',-1);
+            }
+        }
+        return shopReturn('操作失败，请检查订单状态是否已改变');
+    }
 
     /**
      * 用户拒收订单
@@ -955,7 +968,7 @@ class Orders extends Model{
 					$logOrder = [];
 					$logOrder['orderId'] = $orderId;
 					$logOrder['orderStatus'] = -3;
-					$logOrder['logContent'] = "用户拒收订单，拒收原因：".$reasonData['dataName'].(($reason==10000)?"-".$content:"");
+					$logOrder['logContent'] = "用户拒收订单，拒收原因：".$reasonData['dataName'].(($reason_id==10000)?"-".$content:"");
 					$logOrder['logUserId'] = $userId;
 					$logOrder['logType'] = 0;
 					$logOrder['logTime'] = date('Y-m-d H:i:s');
@@ -964,7 +977,7 @@ class Orders extends Model{
 					$tpl = WSTMsgTemplates('ORDER_REJECT');
 	                if( $tpl['tplContent']!='' && $tpl['status']=='1'){
 	                    $find = ['${ORDER_NO}','${REASON}'];
-	                    $replace = [$order['orderNo'],$reasonData['dataName'].(($reason==10000)?"-".$content:"")];
+	                    $replace = [$order['orderNo'],$reasonData['dataName'].(($reason_id==10000)?"-".$content:"")];
 	                   
 	                	$msg = array();
 			            $msg["shopId"] = $order['shopId'];
@@ -997,7 +1010,7 @@ class Orders extends Model{
 		                $params['GOODS'] = implode(',',$goodsNames);
 		                $params['MONEY'] = $order['realTotalMoney'] + $order['scoreMoney'];
 		                $params['ADDRESS'] = $order['userAddress']." ".$order['userName'];
-		                $params['REASON'] = $reasonData['dataName'].(($reason==10000)?"-".$content:"");
+		                $params['REASON'] = $reasonData['dataName'].(($reason_id==10000)?"-".$content:"");
 	                    
 		            	$msg = array();
 						$tplCode = "WX_ORDER_REJECT";
@@ -1020,7 +1033,7 @@ class Orders extends Model{
 			                $params['GOODS'] = implode(',',$goodsNames);
 			                $params['MONEY'] = $order['realTotalMoney'] + $order['scoreMoney'];
 			                $params['ADDRESS'] = $order['userAddress']." ".$order['userName'];
-			                $params['REASON'] = $reasonData['dataName'].(($reason==10000)?"-".$content:"");
+			                $params['REASON'] = $reasonData['dataName'].(($reason_id==10000)?"-".$content:"");
 			            	WSTWxBatchMessage(['CODE'=>'WX_ADMIN_ORDER_REJECT','userType'=>3,'userId'=>explode(',',WSTConf('CONF.rejectOrderTipUsers')),'params'=>$params]);
 		                }
 		            } 
@@ -1116,13 +1129,13 @@ class Orders extends Model{
 			$logFilter[] = $v['orderStatus'];
 		}
 		//获取订单商品
-		$orders['goods'] = Db::name('order_goods')->alias('og')->join('__GOODS__ g','g.goodsId=og.goodsId','left')->where('orderId',$orderId)->field('og.*,g.goodsSn')->order('id asc')->select();
-		//如果是虚拟商品
-		if($orders['orderType']==1){
-			foreach ($orders['goods'] as $key => $v) {
-				$orders['goods'][$key]['extraJson'] = json_decode($v['extraJson'],true);
-			}
-		}
+		$orders['list'] = Db::name('order_goods')->alias('og')->join('__GOODS__ g','g.goodsId=og.goodsId','left')->where('orderId',$orderId)->field('og.*,g.goodsSn')->order('id asc')->select();
+        foreach ($orders['list'] as $key => $v) {
+            $orders['list'][$key]['goodsImg'] = formatUrl($v['goodsImg'],2);
+            //如果是虚拟商品
+            if($orders['orderType']==1)$orders['list'][$key]['extraJson'] = json_decode($v['extraJson'],true);
+        }
+
         // 发货时间与快递单号
         $orderExpressNos = Db::name('order_express')->where([['orderId','=',$orderId],['isExpress','=',1]])->column("expressNo");
         if($orderExpressNos){
