@@ -26,13 +26,13 @@ class LogSms extends Base{
 		$ip = request()->ip();
 		
 		//检测短信验证码验证是否正确
-		if(WSTConf("CONF.smsVerfy")==1){
-			$smsverfy = input("post.smsVerfy");
-			$rs = WSTVerifyCheck($smsverfy);
-			if(!$rs){
-				return WSTReturn("验证码不正确!",-2);
-			}
-		}
+//		if(WSTConf("CONF.smsVerfy")==1){
+//			$smsverfy = input("post.smsVerfy");
+//			$rs = WSTVerifyCheck($smsverfy);
+//			if(!$rs){
+//				return WSTReturn("验证码不正确!",-2);
+//			}
+//		}
 		//检测是否超过每日短信发送数
 		$date = date('Y-m-d');
 		$smsRs = $this->field("count(smsId) counts,max(createTime) createTime")

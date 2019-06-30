@@ -214,8 +214,25 @@ class Goods extends Base{
         }
     }
 
+    public function share()
+    {
+        $validate = new Validate([
+            'goodsId'          => 'require',
+        ]);
+        $validate->message([
+            'goodsId.require'          => '商品id格式错误!',
+        ]);
+        $data = $this->request->param();
+        if (!$validate->check($data)) {
+            $this->response(0,$validate->getError());
+        }
+        $m = new M();
+        $re= $m->shareInfo();
+        $this->response($re);
+    }
+
     //分类列表
-    function catsList(){
+    public function catsList(){
         $GoodsCats = new GoodsCats();
         try{
             $category = $GoodsCats->getFloors();

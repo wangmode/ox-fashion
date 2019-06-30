@@ -56,7 +56,7 @@ class Carts extends Base{
         $userAddress = new UserAddress();
         $userId = $this->getUserId();
         $address = $userAddress->getDefaultAddress($userId);
-
+		$address['userAddress'] = $address['areaName'].$address['userAddress'];
         //获取省份
         //$areas = model('Areas')->listQuery();
         //$this->assign('areaList',$areas);

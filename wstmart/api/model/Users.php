@@ -48,6 +48,20 @@ class Users extends Model {
     }
 
     /**
+     * 找回密码获取用户信息
+     * @param $userPhone
+     */
+    public function getUserInfo($userPhone)
+    {
+        try{
+            $info = $this->where([["loginName|userPhone",'=',$userPhone],['dataFlag','=',1]])->find();
+            shopReturn('用户信息！',1,$info);
+        }catch (Exception $exception){
+            shopReturn('获取用户信息错误！',0);
+        }
+    }
+
+    /**
      * @param $info
      * @param int $loginSrc
      * @return array
@@ -153,6 +167,8 @@ class Users extends Model {
 
     /**
      * 会员注册
+     * @param int $loginSrc
+     * @return array
      */
     public function toRegister($loginSrc = 0){
         $validate = new Validate([
@@ -179,22 +195,22 @@ class Users extends Model {
             return shopReturn("注册手机号与验证手机号不一致!");
         }
         //检测账号是否存在
-        $crs = WSTCheckLoginKey($loginName);
-        if($crs['status']!=1)return $crs;
+        $count = $this->where('loginName|userPhone',$data['loginName'])->count();
+        if($count>0)return shopReturn("手机号已存在!");
         $decrypt_data = WSTRSA($data['loginPwd']);
         $decrypt_data2 = WSTRSA($data['reUserPwd']);
         if($decrypt_data['status']==1 && $decrypt_data2['status']==1){
             $data['loginPwd'] = $decrypt_data['data'];
             $data['reUserPwd'] = $decrypt_data2['data'];
         }else{
-            return WSTReturn('注册失败');
+            return shopReturn('注册失败');
         }
-        if($data['loginPwd']!=$data['reUserPwd']){
-            return WSTReturn("两次输入密码不一致!");
+        if($data['loginPwd'] != $data['reUserPwd']){
+            return shopReturn("两次输入密码不一致!");
         }
         foreach ($data as $v){
             if($v ==''){
-                return WSTReturn("注册信息不完整!");
+                return shopReturn("注册信息不完整!");
             }
         }
         $mobileCode = input("post.mobileCode");
@@ -202,11 +218,9 @@ class Users extends Model {
         $data['userPhone'] = $loginName;
         $verify = session('VerifyCode_userPhone_Verify');
         if($mobileCode=="" || $verify != $mobileCode){
-            return WSTReturn("短信验证码错误!");
+            return shopReturn("短信验证码错误!");
         }
-        $loginName = WSTRandomLoginName($loginName);
-
-        if($loginName=='')return WSTReturn("注册失败!");//分派不了登录名
+        if($loginName=='')return shopReturn("注册失败!");//分派不了登录名
         $data['loginName'] = $loginName;
         unset($data['reUserPwd']);
         unset($data['protocol']);
@@ -219,22 +233,6 @@ class Users extends Model {
         $data['userScore'] = 0;
         $data['createTime'] = date('Y-m-d H:i:s');
         $data['dataFlag'] = 1;
-        $wxOpenId = session('WST_WX_OPENID');
-        if($wxOpenId){
-            $data['wxOpenId'] = session('WST_WX_OPENID');
-            $userinfo = session('WST_WX_USERINFO');
-            if($userinfo){
-                $nickname = json_encode($userinfo['nickname']);
-                $nickname = preg_replace("/\\\u[ed][0-9a-f]{3}\\\u[ed][0-9a-f]{3}/","*",$nickname);//替换成*
-                $nickname = json_decode($nickname);
-                if($nickname=="") $nickname = "微信用户";
-                $data['userName'] = $nickname;
-                $data['userSex'] = $userinfo['sex'];
-                $data['userPhoto'] = $userinfo['headimgurl'];
-                // 保存unionId【若存在】 详见 unionId说明 https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421140839
-                $data['wxUnionId'] = isset($userinfo['unionid'])?$userinfo['unionid']:'';
-            }
-        }
         Db::startTrans();
         try{
             $userId = $this->data($data)->save();
@@ -254,9 +252,11 @@ class Users extends Model {
                 Db::name('log_user_logins')->insert($data);
                 $user = $this->get(['userId'=>$userId]);
                 if($user['userPhoto']=='')$user['userPhoto'] = WSTConf('CONF.userLogo');
-                session('WST_USER',$user);
-                //注册成功后执行钩子
+                $user['userPhoto'] = formatUrl($user['userPhoto']);
+                $accessToken = $this->buildAccessToken(self::APP_ID,self::AppSecret);
+                cache($accessToken, $user, self::EXPIRE_TIME);
                 hook('afterUserRegist',['user'=>$user]);
+                $rs['access_token'] = $accessToken;
                 //发送消息
                 $tpl = WSTMsgTemplates('USER_REGISTER');
                 if( $tpl['tplContent']!='' && $tpl['status']=='1'){
@@ -265,12 +265,55 @@ class Users extends Model {
                     WSTSendMsg($userId,str_replace($find,$replace,$tpl['tplContent']),['from'=>0,'dataId'=>0]);
                 }
                 Db::commit();
-                return WSTReturn("注册成功",1);
+                return shopReturn("注册成功",1,$rs);
             }
         }catch (\Exception $e) {
             Db::rollback();
         }
-        return WSTReturn("注册失败!");
+        return shopReturn("注册失败!",0);
+    }
+
+    /**
+     * 重置用户密码
+     */
+    public function resetPass(){
+        if(time()>floatval(session('REST_Time'))+30*60){
+            return shopReturn("页面已失效！", 0);
+        }
+        $reset_userId = (int)session('REST_userId');
+        if($reset_userId==0){
+            return shopReturn("无效的用户！", 0);
+        }
+        try{
+            $user = $this->where(["dataFlag"=>1,"userStatus"=>1,"userId"=>$reset_userId])->find();
+            if(empty($user)){
+                return shopReturn("无效的用户！", 0);
+            }
+        }catch (Exception $exception){
+            return shopReturn($exception->getMessage(), 0);
+        }
+
+        $loginPwd = Request::post('loginPwd');
+        $decrypt_data = WSTRSA($loginPwd);
+        if($decrypt_data['status']==1){
+            $loginPwd = $decrypt_data['data'];
+        }else{
+            return shopReturn('修改失败');
+        }
+        if(trim($loginPwd)==''){
+            return shopReturn("无效的密码！", -1);
+        }
+        $data['loginPwd'] = md5($loginPwd.$user["loginSecret"]);
+        $rc = $this->update($data,['userId'=>$reset_userId]);
+        if(false !== $rc){
+            session('REST_userId',null);
+            session('REST_Time',null);
+            session('REST_success',null);
+            session('findPass',null);
+            return shopReturn("修改成功", 1);
+        }else{
+            return shopReturn("修改失败！", 0);
+        }
     }
 
     /**
@@ -369,6 +412,62 @@ class Users extends Model {
         }catch (Exception $e) {
             Db::rollback();
             throw new Exception('编辑失败'.$e->getMessage());
+        }
+    }
+
+    /**
+     * 绑定手机
+     * @param $userId
+     * @param $userPhone
+     * @return array
+     */
+    public function editPhone($userId,$userPhone){
+        $data = array();
+        $data["userPhone"] = $userPhone;
+        $rs = $this->update($data,['userId'=>$userId]);
+        if(false !== $rs){
+            return shopReturn("绑定成功", 1);
+        }else{
+            return shopReturn($this->getError(),-1);
+        }
+    }
+
+    /**
+     * 重置用户支付密码
+     * @param $userId
+     * @return array
+     */
+    public function resetPay($userId){
+        $timeVerify = session('Verify_backPaypwd_Time');
+        if(time()>floatval($timeVerify)+10*60){
+            session('Type_backPaypwd',null);
+            return shopReturn("校验码已失效，请重新验证！");
+        }
+        $data = array();
+        $data["payPwd"] = input("post.newPass");
+        $decrypt_data = WSTRSA($data["payPwd"]);
+        if($decrypt_data['status']==1){
+            $data["payPwd"] = $decrypt_data['data'];
+        }else{
+            return shopReturn('修改失败');
+        }
+        if(!$data["payPwd"]){
+            return shopReturn('支付密码不能为空',0);
+        }
+        try{
+            $rs = $this->where('userId='.$userId)->find();
+        }catch (Exception $exception){
+            return shopReturn($exception->getMessage(),0);
+        }
+        $data["payPwd"] = md5($data["payPwd"].$rs['loginSecret']);
+        $rs = $this->update($data,['userId'=>$userId]);
+        if(false !== $rs){
+            session('Type_backPaypwd',null);
+            session('Verify_backPaypwd_info',null);
+            session('Verify_backPaypwd_Time',null);
+            return shopReturn("支付密码设置成功", 1);
+        }else{
+            return shopReturn("支付密码修改失败",0);
         }
     }
 }

@@ -1,5 +1,7 @@
 <?php
 namespace wstmart\api\model;
+use think\Exception;
+use think\facade\Request;
 use wstmart\common\model\Goods as CGoods;
 use think\Db;
 use  wstmart\common\model\Favorites;
@@ -96,6 +98,22 @@ class Goods extends CGoods{
 			$rs['favGood'] = $f->checkFavorite($goodsId,0,$userId);
 		}
 		return $rs;
+	}
+
+    /**
+     * 商品分享
+     */
+    public function shareInfo()
+    {
+      $goodsId = Request::post('goodsId');
+      try{
+          $goods_info = $this->where('goodsId',$goodsId)->field('goodsName,goodsImg')->find();
+          $goods_info['goodsImg'] = formatUrl($goods_info['goodsImg'],2);
+          $goods_info['description'] = '我在ox-fashion发现了一个不错的商品，赶快来看看吧！';
+          shopReturn('分享',1,$goods_info);
+      }catch (Exception $exception){
+          shopReturn('分享',0);
+      }
 	}
 	
 	

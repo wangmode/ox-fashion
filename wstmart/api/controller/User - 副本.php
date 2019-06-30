@@ -20,6 +20,7 @@ use think\Validate;
  * 用户控制器
  */
 class User extends Base{
+
     public function index(){
         $user = $this->getUserInfo();
         $this->response(1,'用户信息',$user);
@@ -37,50 +38,56 @@ class User extends Base{
     }
 
     /**
-     * 获取验证码
-     * @param int $type
+     * 手机验证码获取（找回密码）
+     */
+    public function getFindPhone(){
+        session('WST_USER',session('findPass.userId'));
+        if(session('findPass.userPhone')==''){
+            $this->response(0,'你没有预留手机号码，请通过其他方式找回密码！');
+        }
+        $phoneVerify = rand(100000,999999);
+        session('WST_USER',null);
+        $rv = ['status'=>-1,'msg'=>'短信发送失败'];
+        $tpl = WSTMsgTemplates('PHONE_FOTGET');
+        if( $tpl['tplContent']!='' && $tpl['status']=='1'){
+            $params = ['tpl'=>$tpl,'params'=>['VERFIY_CODE'=>$phoneVerify,'VERFIY_TIME'=>10]];
+            $m = new LogSms();
+            $rv = $m->sendSMS(0,session('findPass.userPhone'),$params,'getPhoneVerify',$phoneVerify);
+        }
+        if($rv['status']==1){
+            // 记录发送短信的时间,用于验证是否过期
+            session('REST_Time',time());
+            $USER = [];
+            $USER['phoneVerify'] = $phoneVerify;
+            $USER['time'] = time();
+            session('findPhone',$USER);
+            return WSTReturn('短信发送成功!',1);
+        }
+        return $rv;
+    }
+
+    /**
+     * 获取验证码（注册）
      */
     public function getPhoneVerifyCode($type = 1){
+        $userPhone = Request::post('userPhone');
+        if(!WSTIsPhone($userPhone)){
+            $this->response(0,'手机号格式不正确');
+        }
         $Users= new Users();
+        $template = 'PHONE_USER_REGISTER_VERFIY';
         switch ($type){
             case 1://注册
-                $userPhone = Request::post('userPhone');
-                if(!WSTIsPhone($userPhone))$this->response(0,'手机号格式不正确');
                 $rs = $Users->checkUserPhone($userPhone);
                 if($rs)$this->response(0,'手机号已存在');
                 $template = 'PHONE_USER_REGISTER_VERFIY';
                 break;
-            case 2://忘记密码
+            case 2:
                 session('WST_USER',session('findPass.userId'));
-                $userPhone = session('findPass.userPhone');
-                if($userPhone == ''){
+                if(session('findPass.userPhone')==''){
                     $this->response(0,'你没有预留手机号码，请通过其他方式找回密码！');
                 }
                 $template = 'PHONE_FOTGET';
-                break;
-            case 3://修改手机号
-                $data = $this->getUser();
-                $userPhone = $data['userPhone'];
-                $template = 'PHONE_EDIT';
-                break;
-            case 4://记支付密码
-                $data = $this->getUser();
-                $userPhone = $data['userPhone'];
-                $template = 'PHONE_FOTGET_PAY';
-                break;
-            case 5://绑定手机
-                $userPhone = Request::post('userPhone');
-                if(!WSTIsPhone($userPhone))$this->response(0,'手机号格式不正确');
-                $rs = $Users->checkUserPhone($userPhone);
-                if($rs)$this->response(0,'手机号已存在');
-                $template = 'PHONE_BIND';
-                break;
-            default:
-                $userPhone = Request::post('userPhone');
-                if(!WSTIsPhone($userPhone))$this->response(0,'手机号格式不正确');
-                $rs = $Users->checkUserPhone($userPhone);
-                if($rs)$this->response(0,'手机号已存在');
-                $template = 'PHONE_USER_REGISTER_VERFIY';
                 break;
         }
         $phoneVerify = rand(100000,999999);
@@ -106,37 +113,16 @@ class User extends Base{
                     $USER['time'] = time();
                     session('findPhone',$USER);
                     break;
-                case 3:
-                    $USER = [];
-                    $USER['userPhone'] = $userPhone;
-                    $USER['phoneVerify'] = $phoneVerify;
-                    session('Verify_info2',$USER);
-                    session('Verify_userPhone_Time2',time());
-                    break;
-                case 4:
-                    $USER = [];
-                    $USER['userPhone'] = $userPhone;
-                    $USER['phoneVerify'] = $phoneVerify;
-                    session('Verify_backPaypwd_info',$USER);
-                    session('Verify_backPaypwd_Time',time());
-                    break;
-                case 5://绑定手机
-                    $USER = [];
-                    $USER['userPhone'] = $userPhone;
-                    $USER['phoneVerify'] = $phoneVerify;
-                    session('Verify_info',$USER);
-                    session('Verify_userPhone_Time',time());
-                    break;
-                default:
-                    session('VerifyCode_userPhone',$userPhone);
-                    session('VerifyCode_userPhone_Verify',$phoneVerify);
-                    session('VerifyCode_userPhone_Time',time());
-                    break;
             }
+
+
+        }
+        if($rv['status']==1){
             $this->response(1,'短信发送成功！',['verify'=>$phoneVerify]);
         }else{
             $this->response(0,$rv['msg']);
         }
+
     }
 
 
@@ -152,6 +138,7 @@ class User extends Base{
     {
         $model = new Users();
         $validate = new Validate([
+            //'token'          => 'require',
             'account'          => 'require',
             'password'         => 'require',
         ]);
@@ -178,7 +165,16 @@ class User extends Base{
         if (!$validate->check($data)) {
             $this->response(0,$validate->getError());
         }
+        //cache()
     }
+		    
+    /**
+	 * 用户退出
+	 */
+	public function logout(){
+		$rs = model('Users')->logout();
+		return $rs;
+	}
 	
 	
 	/**
@@ -189,6 +185,8 @@ class User extends Base{
 		$rs = $Users->toRegister();
 		return $rs;
 	}
+
+
 
     /**
      *  找回密码
@@ -244,6 +242,48 @@ class User extends Base{
     }
 
 
+	
+	
+	/**
+	 * 判断手机或邮箱是否存在
+	 */
+	public function checkLoginKey(){
+		$m = new MUsers();
+		if(input("post.loginName"))$val=input("post.loginName");
+		if(input("post.userPhone"))$val=input("post.userPhone");
+		if(input("post.userEmail"))$val=input("post.userEmail");
+        $userId = (int)session('WST_USER.userId');
+		$rs = WSTCheckLoginKey($val,$userId);
+		if($rs["status"]==1){
+			return array("ok"=>"");
+		}else{
+			return array("error"=>$rs["msg"]);
+		}
+	}
+	
+	/**
+	 * 判断邮箱是否存在
+	 */
+	public function checkEmail(){
+		$data = $this->checkLoginKey();
+		if(isset($data['error']))$data['error'] = '对不起，该邮箱已存在';
+		return $data;
+	}
+	
+	/**
+	 * 判断用户名是否存在/忘记密码
+	 */
+	public function checkFindKey(){
+		$m = new MUsers();
+		$userId = (int)session('WST_USER.userId');
+		$rs = WSTCheckLoginKey(input("post.loginName"),$userId);
+		if($rs["status"]==1){
+			return array("error"=>"该用户不存在！");
+		}else{
+			return array("ok"=>"");
+		}
+	}
+
 	/**
     * 修改个人资料
     */
@@ -259,36 +299,176 @@ class User extends Base{
     }
 
     /**
-     * 绑定手机
+     * 修改手机页
      */
-    public function phoneUpdate(){
-        $phoneVerify = Request::post('Checkcode');
-    	$timeVerify = session('Verify_userPhone_Time');
-    	$user_id = $this->getUserId();
-    	if(!session('Verify_info.phoneVerify') || time()>floatval($timeVerify)+10*60){
-            $this->response(0,'页面已失效，请重新验证身份！');
+    public function editPhone(){
+    	//获取用户信息
+    	$userId = (int)session('WST_USER.userId');
+    	$m = new MUsers();
+    	$data = $m->getById($userId);
+    	if($data['userPhone']!='')$data['userPhone'] = WSTStrReplace($data['userPhone'],'*',3);
+    	$this->assign('data',$data);
+    	$process = 'One';
+    	$this->assign('process',$process);
+    	if($data['userPhone']){
+    		return $this->fetch('users/security/user_edit_phone');
+    	}else{
+    		return $this->fetch('users/security/user_phone');
     	}
-   		if($phoneVerify==session('Verify_info.phoneVerify')){
-   			$Users = new Users();
-   			$rs = $Users->editPhone($user_id,session('Verify_info.userPhone'));
-            $this->response($rs);
-   		}
-        $this->response(0,"校验码不一致，请重新输入！");
+    }
+
+
+    /**
+     * 绑定手机/获取验证码
+     */
+    public function getPhoneVerifyo(){
+    	$userPhone = input("post.userPhone");
+    	if(!WSTIsPhone($userPhone)){
+    		return WSTReturn("手机号格式不正确!");
+    		exit();
+    	}
+    	$rs = array();
+    	$m = new MUsers();
+    	$rs = WSTCheckLoginKey($userPhone,(int)session('WST_USER.userId'));
+    	if($rs["status"]!=1){
+    		return WSTReturn("手机号已存在!");
+    		exit();
+    	}
+        $data = $m->getById(session('WST_USER.userId'));
+    	$phoneVerify = rand(100000,999999);
+        $rv = ['status'=>-1,'msg'=>'短信发送失败'];
+        $tpl = WSTMsgTemplates('PHONE_EDIT');
+        if( $tpl['tplContent']!='' && $tpl['status']=='1'){
+            $params = ['tpl'=>$tpl,'params'=>['LOGIN_NAME'=>$data['loginName'],'VERFIY_CODE'=>$phoneVerify,'VERFIY_TIME'=>10]];
+            $m = new LogSms();
+            $rv = $m->sendSMS(0,$userPhone,$params,'getPhoneVerifyo',$phoneVerify);
+        }
+    	if($rv['status']==1){
+    		$USER = [];
+    		$USER['userPhone'] = $userPhone;
+    		$USER['phoneVerify'] = $phoneVerify;
+    		session('Verify_info',$USER);
+    		session('Verify_userPhone_Time',time());
+    		return WSTReturn('短信发送成功!',1);
+    	}
+    	return $rv;
     }
 
     /**
+     * 绑定手机
+     */
+    public function getPhoneVerifyb(){
+        $userPhone = input("post.userPhone");
+        if(!WSTIsPhone($userPhone)){
+            return WSTReturn("手机号格式不正确!");
+            exit();
+        }
+        $rs = array();
+        $m = new MUsers();
+        $rs = WSTCheckLoginKey($userPhone,(int)session('WST_USER.userId'));
+        if($rs["status"]!=1){
+            return WSTReturn("手机号已存在!");
+            exit();
+        }
+        $data = $m->getById(session('WST_USER.userId'));
+        $phoneVerify = rand(100000,999999);
+        $rv = ['status'=>-1,'msg'=>'短信发送失败'];
+        $tpl = WSTMsgTemplates('PHONE_BIND');
+        if( $tpl['tplContent']!='' && $tpl['status']=='1'){
+            $params = ['tpl'=>$tpl,'params'=>['LOGIN_NAME'=>$data['loginName'],'VERFIY_CODE'=>$phoneVerify,'VERFIY_TIME'=>10]];
+            $m = new LogSms();
+            $rv = $m->sendSMS(0,$userPhone,$params,'getPhoneVerifyb',$phoneVerify);
+        }
+        if($rv['status']==1){
+            $USER = [];
+            $USER['userPhone'] = $userPhone;
+            $USER['phoneVerify'] = $phoneVerify;
+            session('Verify_info',$USER);
+            session('Verify_userPhone_Time',time());
+            return WSTReturn('短信发送成功!',1);
+        }
+        return $rv;
+    }
+    /**
+     * 绑定手机
+     */
+    public function phoneEdito(){
+    	$phoneVerify = input("post.Checkcode");
+    	$process = input("post.process");
+    	$timeVerify = session('Verify_userPhone_Time');
+    	if(!session('Verify_info.phoneVerify') || time()>floatval($timeVerify)+10*60){
+    		return WSTReturn("地址已失效，请重新验证身份！");
+    		exit();
+    	}
+   		if($phoneVerify==session('Verify_info.phoneVerify')){
+   			$m = new MUsers();
+   			$rs = $m->editPhone((int)session('WST_USER.userId'),session('Verify_info.userPhone'));
+   			if($process=='Two'){
+   				$rs['process'] = $process;
+   			}else{
+   				$rs['process'] = '0';
+   			}
+   			return $rs;
+   		}
+   		return WSTReturn("校验码不一致，请重新输入！");
+    }
+    public function editPhoneSu(){
+    	$pr = input("get.pr");
+    	$process = 'Three';
+    	$this->assign('process',$process);
+	    if($pr == 'Two'){
+	    	return $this->fetch('users/security/user_edit_phone');
+	    }else{
+	    	return $this->fetch('users/security/user_phone');
+	    }
+    }
+    /**
+     * 获取验证码（修改手机/）
+     */
+    public function getPhoneVerifyt(){
+    	$m = new MUsers();
+    	$data = $m->getById(session('WST_USER.userId'));
+    	$userPhone = $data['userPhone'];
+    	$phoneVerify = rand(100000,999999);
+        $rv = ['status'=>-1,'msg'=>'短信发送失败'];
+        $tpl = WSTMsgTemplates('PHONE_EDIT');
+        if( $tpl['tplContent']!='' && $tpl['status']=='1'){
+            $params = ['tpl'=>$tpl,'params'=>['LOGIN_NAME'=>$data['loginName'],'VERFIY_CODE'=>$phoneVerify,'VERFIY_TIME'=>10]];
+            $m = new LogSms();
+            $rv = $m->sendSMS(0,$userPhone,$params,'getPhoneVerifyt',$phoneVerify);
+        }
+     	if($rv['status']==1){
+	    	$USER = [];
+	    	$USER['userPhone'] = $userPhone;
+	    	$USER['phoneVerify'] = $phoneVerify;
+	    	session('Verify_info2',$USER);
+	    	session('Verify_userPhone_Time2',time());
+	    	return WSTReturn('短信发送成功!',1);
+    	}
+    	return $rv;
+    }
+    /**
      * 修改手机
      */
-    public function phoneEdit(){
-        $phoneVerify = Request::post('Checkcode');
+    public function phoneEditt(){
+    	$phoneVerify = input("post.Checkcode");
     	$timeVerify = session('Verify_userPhone_Time2');
     	if(!session('Verify_info2.phoneVerify') || time()>floatval($timeVerify)+10*60){
-    	    $this->response(0,"校验码已失效，请重新发送！");
+    		return WSTReturn("校验码已失效，请重新发送！");
+    		exit();
     	}
     	if($phoneVerify==session('Verify_info2.phoneVerify')){
-            $this->response(1,"校验证成功！");
+    		return WSTReturn("验证成功",1);
     	}
-        $this->response(0,"校验码不一致，请重新输入！");
+    	return WSTReturn("校验码不一致，请重新输入！",-1);
+    }
+    public function editPhoneSut(){
+    	$process = 'Two';
+    	$this->assign('process',$process);
+    	if(session('Verify_info2.phoneVerify')){
+    		return $this->fetch('users/security/user_edit_phone');
+    	}
+        $this->error('地址已失效，请重新验证身份');
     }
     /****************************************************** 忘记密码 **********************************************************/
     /**
@@ -308,7 +488,31 @@ class User extends Base{
     	$this->assign('process', $process);
     	return $this->fetch('users/security/user_edit_pay');
     }
-
+    /**
+     * 忘记支付密码：发送短信
+     */
+    public function  getphoneverifypay(){
+    	$m = new MUsers();
+    	$data = $m->getById(session('WST_USER.userId'));
+    	$userPhone = $data['userPhone'];
+    	$phoneVerify = rand(100000,999999);
+    	$rv = ['status'=>-1,'msg'=>'短信发送失败'];
+    	$tpl = WSTMsgTemplates('PHONE_FOTGET_PAY');
+    	if( $tpl['tplContent']!='' && $tpl['status']=='1'){
+    		$params = ['tpl'=>$tpl,'params'=>['LOGIN_NAME'=>$data['loginName'],'VERFIY_CODE'=>$phoneVerify,'VERFIY_TIME'=>10]];
+    		$m = new LogSms();
+    		$rv = $m->sendSMS(0,$userPhone,$params,'getPhoneVerifyt',$phoneVerify);
+    	}
+    	if($rv['status']==1){
+    		$USER = [];
+    		$USER['userPhone'] = $userPhone;
+    		$USER['phoneVerify'] = $phoneVerify;
+    		session('Verify_backPaypwd_info',$USER);
+    		session('Verify_backPaypwd_Time',time());
+    		return WSTReturn('短信发送成功!',1);
+    	}
+    	return $rv;
+    }
     /**
      * 忘记支付密码：验证
      */
@@ -324,21 +528,52 @@ class User extends Base{
     	}
     	return WSTReturn("校验码不一致，请重新输入！",-1);
     }
-
+    public function editPaySut(){
+    	$process = 'Two';
+    	$this->assign('process',$process);
+    	if(session('Verify_backPaypwd_info.phoneVerify')){
+    		return $this->fetch('users/security/user_edit_pay');
+    	}
+    	$this->error('地址已失效，请重新验证身份');
+    }
     /**
      * 忘记支付密码：设置
      */
     public function payEdito(){
+    	$process = input("post.process");
     	$timeVerify = session('Verify_backPaypwd_Time');
     	if(!session('Verify_backPaypwd_info.phoneVerify') || time()>floatval($timeVerify)+10*60){
-    	    $this->response(0,"地址已失效，请重新验证身份！");
+    		return WSTReturn("地址已失效，请重新验证身份！");
+    		exit();
     	}
-    	$userId = $this->getUserId();
-    	$Users = new Users();
-    	$rs = $Users->resetPay($userId);
-        $this->response($rs);
+    	$m = new MUsers();
+    	$rs = $m->resetbackPay();
+    	if($process=='Two'){
+    		$rs['process'] = $process;
+    	}else{
+    		$rs['process'] = '0';
+    	}
+    	return $rs;
     }
-
+    /**
+     * 忘记支付密码：完成
+     */
+    public function editPaySu(){
+    	$pr = input("get.pr");
+    	$process = 'Three';
+    	$this->assign('process',$process);
+    	if($pr == 'Two'){
+    		return $this->fetch('users/security/user_edit_pay');
+    	}else{
+    		return $this->fetch('users/security/user_pay_pass');
+    	}
+    }
+    /**
+     * 忘记密码
+     */
+    public function forgetPass(){
+    	return $this->fetch('forget_pass');
+    }
     public function forgetPasst(){
     	if(time()<floatval(session('findPass.findTime'))+30*60){
 	    	$userId = session('findPass.userId');
@@ -385,6 +620,10 @@ class User extends Base{
         }else{
             return WSTReturn('校验码错误',-1);
         }
+
+    }
+    public function forgetPassf(){
+    	return $this->fetch('forget_pass4');
     }
     
 
@@ -410,6 +649,37 @@ class User extends Base{
         }
         return shopReturn('校验码错误!',0);
     }
+
+    /**
+     * 发送验证邮件/找回密码
+     */
+    public function getfindEmail(){
+    	$code = rand(0,999999);
+        $sendRs = ['status'=>-1,'msg'=>'邮件发送失败'];
+        $tpl = WSTMsgTemplates('EMAIL_FOTGET');
+        if( $tpl['tplContent']!='' && $tpl['status']=='1'){
+            $find = ['${LOGIN_NAME}','${SEND_TIME}','${VERFIY_CODE}','${VERFIY_TIME}'];
+            $replace = [session('findPass.loginName'),date('Y-m-d H:i:s'),$code,30];
+            $sendRs = WSTSendMail(session('findPass.userEmail'),'密码重置',str_replace($find,$replace,$tpl['content']));
+        }
+        if($sendRs['status']==1){
+            $uId = session('findPass.userId');
+            session("findPass.key", $code);
+            // 发起重置密码的时间;
+            session('REST_Time',time());
+            return WSTReturn("发送成功",1);
+        }else{
+            return WSTReturn($sendRs['msg'],-1);
+        }
+    }
+    
+    /**
+     * 加载登录小窗口
+     */
+    public function toLoginBox(){
+    	return $this->fetch('box_login');
+    }
+
     /**
     * 跳去修改支付密码页
     */
