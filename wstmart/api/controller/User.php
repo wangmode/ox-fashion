@@ -38,10 +38,10 @@ class User extends Base{
 
     /**
      * 获取验证码
-     * @param int $type
      */
-    public function getPhoneVerifyCode($type = 1){
+    public function getPhoneVerifyCode(){
         $Users= new Users();
+        $type = Request::post('type',1);
         switch ($type){
             case 1://注册
                 $userPhone = Request::post('userPhone');
@@ -63,7 +63,7 @@ class User extends Base{
                 $userPhone = $data['userPhone'];
                 $template = 'PHONE_EDIT';
                 break;
-            case 4://记支付密码
+            case 4://支付密码
                 $data = $this->getUser();
                 $userPhone = $data['userPhone'];
                 $template = 'PHONE_FOTGET_PAY';
@@ -187,7 +187,7 @@ class User extends Base{
 	public function register(){
 		$Users = new Users();
 		$rs = $Users->toRegister();
-		return $rs;
+		$this->response($rs);
 	}
 
     /**
@@ -227,7 +227,7 @@ class User extends Base{
                     $loginPwd = $decrypt_data['data'];
                     $repassword = $decrypt_data2['data'];
                 }else{
-                    return shopReturn('设置失败');
+                    return shopReturn('设置失败',0);
                 }
                 if ($loginPwd == $repassword) {
                     $Users = new Users();
@@ -290,45 +290,26 @@ class User extends Base{
     	}
         $this->response(0,"校验码不一致，请重新输入！");
     }
-    /****************************************************** 忘记密码 **********************************************************/
-    /**
-     * 忘记支付密码
-     */
-    public function backPayPass(){
-    	$m = new MUsers();
-    	$userId = (int)session('WST_USER.userId');
-    	$user = $m->getById($userId);
-    	$userPhone = $user['userPhone'];
-    	$user['userPhone'] = WSTStrReplace($user['userPhone'],'*',3);
-    	$user['phoneType'] = empty($userPhone)?0:1;
-    	$backType = (int)session('Type_backPaypwd');
-    	$timeVerify = session('Verify_backPaypwd_Time');
-    	$process = 'One';
-    	$this->assign('data', $user);
-    	$this->assign('process', $process);
-    	return $this->fetch('users/security/user_edit_pay');
-    }
-
+    /**********************忘记密码 ************************/
     /**
      * 忘记支付密码：验证
      */
-    public function payEditt(){
-    	$payVerify = input("post.Checkcode");
+    public function payValidate(){
+        $payVerify = Request::post('Checkcode');
     	$timeVerify = session('Verify_backPaypwd_Time');
     	if(!session('Verify_backPaypwd_info.phoneVerify') || time()>floatval($timeVerify)+10*60){
-    		return WSTReturn("校验码已失效，请重新发送！");
-    		exit();
+            $this->response(0,"校验码已失效，请重新发送！");
     	}
     	if($payVerify==session('Verify_backPaypwd_info.phoneVerify')){
-    		return WSTReturn("验证成功",1);
+            $this->response(1,"验证成功！");
     	}
-    	return WSTReturn("校验码不一致，请重新输入！",-1);
+        $this->response(0,"校验码不一致，请重新输入！");
     }
 
     /**
      * 忘记支付密码：设置
      */
-    public function payEdito(){
+    public function payReSet(){
     	$timeVerify = session('Verify_backPaypwd_Time');
     	if(!session('Verify_backPaypwd_info.phoneVerify') || time()>floatval($timeVerify)+10*60){
     	    $this->response(0,"地址已失效，请重新验证身份！");
@@ -339,27 +320,6 @@ class User extends Base{
         $this->response($rs);
     }
 
-    public function forgetPasst(){
-    	if(time()<floatval(session('findPass.findTime'))+30*60){
-	    	$userId = session('findPass.userId');
-	    	$m = new MUsers();
-	    	$info = $m->getById($userId);
-	    	if($info['userPhone']!='')$info['userPhone'] = WSTStrReplace($info['userPhone'],'*',3);
-	    	if($info['userEmail']!='')$info['userEmail'] = WSTStrReplace($info['userEmail'],'*',2,'@');
-	    	$this->assign('forgetInfo',$info);
-	    	return $this->fetch('forget_pass2');
-    	}else{
-    		$this->error('页面已过期！');
-    	}
-    }
-    // 重置密码
-    public function resetPass(){
-         if(!session('findPass')){
-            $this->error('连接已失效！',url('home/users/index'));
-         }
-        if(time()>floatval(session('REST_Time'))+30*60)$this->error('连接已失效！');
-        return $this->fetch('forget_pass3');
-    }
     // 验证校验码
     public function forgetPasss(){
         if(!session('findPass')){
@@ -410,25 +370,15 @@ class User extends Base{
         }
         return shopReturn('校验码错误!',0);
     }
-    /**
-    * 跳去修改支付密码页
-    */
-    public function editPayPass(){
-        $m = new MUsers();
-        //获取用户信息
-        $userId = (int)session('WST_USER.userId');
-        $data = $m->getById($userId);
-        $this->assign('data',$data);
-        return $this->fetch('users/security/user_pay_pass');
-    }
+
     /**
     * 修改支付密码
     */
     public function payPassEdit(){
-        $userId = (int)session('WST_USER.userId');
-        $m = new MUsers();
-        $rs = $m->editPayPass($userId);
-        return $rs;
+        $userId = $this->getUserId();
+        $Users = new Users();
+        $rs = $Users->editPayPass($userId);
+        $this->response($rs);
     }
 
     /**

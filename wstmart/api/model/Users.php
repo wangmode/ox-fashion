@@ -174,24 +174,29 @@ class Users extends Model {
         $validate = new Validate([
             'loginName'          => 'mobile',
             'loginPwd'          => 'require',
-            'reUserPwd'          => 'require'
+            'reUserPwd'          => 'require',
+            'mobileCode'          => 'require'
         ]);
         $validate->message([
             'loginName.mobile'          => '手机号格式错误!',
             'loginPwd.require'          => '密码请不要为空！',
             'reUserPwd.require'          => '重复密码请不要为空！',
+            'mobileCode.require'          => '手机验证码不要为空！'
         ]);
         $data = Request::instance()->post();
         if (!$validate->check($data)) {
             shopReturn($validate->getError(),0);
         }
-
+        $verify = session('VerifyCode_userPhone_Verify');
+        if($verify != $data['mobileCode']){
+            return shopReturn("短信验证码错误!");
+        }
         $startTime = (int)session('VerifyCode_userPhone_Time');
         if((time()-$startTime)>120){
             return shopReturn("验证码已超过有效期!");
         }
         $loginName = session('VerifyCode_userPhone');
-        if($data['loginName']!=$loginName){
+        if($data['loginName'] != $loginName){
             return shopReturn("注册手机号与验证手机号不一致!");
         }
         //检测账号是否存在
@@ -213,13 +218,9 @@ class Users extends Model {
                 return shopReturn("注册信息不完整!");
             }
         }
-        $mobileCode = input("post.mobileCode");
+
         //请允许手机号码注册
         $data['userPhone'] = $loginName;
-        $verify = session('VerifyCode_userPhone_Verify');
-        if($mobileCode=="" || $verify != $mobileCode){
-            return shopReturn("短信验证码错误!");
-        }
         if($loginName=='')return shopReturn("注册失败!");//分派不了登录名
         $data['loginName'] = $loginName;
         unset($data['reUserPwd']);
@@ -468,6 +469,63 @@ class Users extends Model {
             return shopReturn("支付密码设置成功", 1);
         }else{
             return shopReturn("支付密码修改失败",0);
+        }
+    }
+
+    /**
+     * 修改用户支付密码
+     * @param $userId
+     * @return array
+     */
+    public function editPayPass($userId){
+        $data = array();
+        $newPass = Request::post('newPass');
+        $reNewPass  = Request::post('reNewPass');
+        $decrypt_data = WSTRSA($newPass);
+        if($decrypt_data['status'] == 1){
+            $newPass = $decrypt_data['data'];
+        }else{
+            return shopReturn('修改失败',0);
+        }
+        if(!$newPass){
+            return shopReturn('支付密码不能为空',0);
+        }
+        try{
+            $rs = $this->where('userId='.$userId)->find();
+        }catch (Exception $exception){
+            return shopReturn($exception->getMessage(),0);
+        }
+        if($newPass != $reNewPass){
+            return shopReturn('两次输入密码不一致！',0);
+        }
+        //核对密码
+        if($rs['payPwd']){
+            $oldPass = Request::post('oldPass');
+            $decrypt_data2 = WSTRSA($oldPass);
+            if($decrypt_data2['status']==1){
+                $oldPass = $decrypt_data2['data'];
+            }else{
+                return shopReturn('修改失败');
+            }
+            if($rs['payPwd']==md5($oldPass.$rs['loginSecret'])){
+                $data["payPwd"] = md5($newPass.$rs['loginSecret']);
+                $rs = $this->update($data,['userId'=>$userId]);
+                if(false !== $rs){
+                    return shopReturn("支付密码修改成功", 1);
+                }else{
+                    return shopReturn("支付密码修改失败",0);
+                }
+            }else{
+                return shopReturn('原始支付密码错误',0);
+            }
+        }else{
+            $data["payPwd"] = md5($newPass.$rs['loginSecret']);
+            $rs = $this->update($data,['userId'=>$userId]);
+            if(false !== $rs){
+                return shopReturn("支付密码设置成功", 1);
+            }else{
+                return shopReturn("支付密码修改失败",0);
+            }
         }
     }
 }

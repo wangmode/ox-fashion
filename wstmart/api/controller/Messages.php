@@ -1,5 +1,6 @@
 <?php
-namespace wstmart\home\controller;
+namespace wstmart\api\controller;
+use wstmart\api\model\Messages as MessagesModel;
 /**
  * ============================================================================
  * WSTMart多用户商城
@@ -16,18 +17,13 @@ namespace wstmart\home\controller;
 class Messages extends Base{
     protected $beforeActionList = ['checkAuth'];
     /**
-    * 查看商城消息
+    * 商城消息
     */
-	public function index(){
-        $this->assign('p',(int)input('p'));
-		return $this->fetch('users/messages/list');
-	}
-    /**
-    * 获取数据
-    */
-    public function pageQuery(){
-        $data = model('Messages')->pageQuery();
-        return WSTReturn("", 1,$data);
+    public function lists(){
+        $userId = $this->getUserId();
+        $Message = new MessagesModel();
+        $data = $Message->pageQuery($userId);
+        $this->response($data);
     }
     /**
     * 查看完整商城消息
