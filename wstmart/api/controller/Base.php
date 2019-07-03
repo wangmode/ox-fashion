@@ -23,7 +23,7 @@ use wstmart\util\Strs;
 class Base extends Controller {
 	public function __construct(){
 		parent::__construct();
-        $skip_array = ['login','register','getPhoneVerifyCode'];
+        $skip_array = ['login','register','get_verify','findpass'];
         $action = $this->request->action();
         if(!in_array($action,$skip_array)){
             try {

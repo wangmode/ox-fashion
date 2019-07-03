@@ -50,14 +50,15 @@ class Users extends Model {
     /**
      * 找回密码获取用户信息
      * @param $userPhone
+     * @return array
      */
     public function getUserInfo($userPhone)
     {
         try{
             $info = $this->where([["loginName|userPhone",'=',$userPhone],['dataFlag','=',1]])->find();
-            shopReturn('用户信息！',1,$info);
+            return shopReturn('用户信息！',1,$info);
         }catch (Exception $exception){
-            shopReturn('获取用户信息错误！',0);
+            return shopReturn('获取用户信息错误！',0);
         }
     }
 
@@ -105,38 +106,58 @@ class Users extends Model {
         }
     }
 
+    /**
+     * 快捷登录
+     * @param $info
+     * @param int $loginSrc
+     * @return array
+     */
     public function quickLogin($info,$loginSrc=1){
-        $code = $info['code'];
-        $account = $info['account'];
-        $rs = $this->where("loginName|userPhone",$account)
-            ->where(["dataFlag"=>1, "userStatus"=>1])
-            ->find();
-        hook("beforeUserLogin",["user"=>&$rs]);
-        if(!empty($rs)){
-            //if($rs['loginPwd']!=md5($password.$rs['loginSecret']))return shopReturn("密码错误");
-            if($rs['userPhoto']=='')$rs['userPhoto'] = WSTConf('CONF.userLogo');
-            $rs['userPhoto'] = formatUrl($rs['userPhoto'],2);
-            unset($rs['loginPwd']);
-            $userId = $rs['userId'];
-            $ip = request()->ip();
-            $update = ["lastTime"=>date('Y-m-d H:i:s'),"lastIP"=>$ip];
-            $this->where(["userId"=>$userId])->update($update);
-
-            //记录登录日志
-            $data = array();
-            $data["userId"] = $userId;
-            $data["loginTime"] = date('Y-m-d H:i:s');
-            $data["loginIp"] = $ip;
-            $data['loginSrc'] = $loginSrc;
-            Db::name('log_user_logins')->insert($data);
-            $accessToken = $this->buildAccessToken(self::APP_ID,self::AppSecret);
-            cache($accessToken, $rs, self::EXPIRE_TIME);
-            hook('afterUserLogin',['user'=>$rs]);
-            $rs['access_token'] = $accessToken;
-            return shopReturn("登录成功",1,$rs);
-        }else{
-            return shopReturn("账户不存在！",0);
+        $verify = session('VerifyCode_login_userPhone_Verify');
+        if($verify !=  $info['code']){
+            return shopReturn("短信验证码错误!");
         }
+        $startTime = (int)session('VerifyCode_login_userPhone_Time');
+        if((time()-$startTime)>120){
+            return shopReturn("验证码已超过有效期!");
+        }
+        $loginName = session('VerifyCode_login_userPhone');
+        if($info['loginName'] != $loginName){
+            return shopReturn("注册手机号与验证手机号不一致!");
+        }
+        try{
+            $rs = $this->where("loginName|userPhone",$info['loginName'])
+                ->where(["dataFlag"=>1, "userStatus"=>1])
+                ->find();
+            hook("beforeUserLogin",["user"=>&$rs]);
+            if(!empty($rs)){
+                if($rs['userPhoto']=='')$rs['userPhoto'] = WSTConf('CONF.userLogo');
+                $rs['userPhoto'] = formatUrl($rs['userPhoto'],2);
+                unset($rs['loginPwd']);
+                $userId = $rs['userId'];
+                $ip = request()->ip();
+                $update = ["lastTime"=>date('Y-m-d H:i:s'),"lastIP"=>$ip];
+                $this->where(["userId"=>$userId])->update($update);
+
+                //记录登录日志
+                $data = array();
+                $data["userId"] = $userId;
+                $data["loginTime"] = date('Y-m-d H:i:s');
+                $data["loginIp"] = $ip;
+                $data['loginSrc'] = $loginSrc;
+                Db::name('log_user_logins')->insert($data);
+                $accessToken = $this->buildAccessToken(self::APP_ID,self::AppSecret);
+                cache($accessToken, $rs, self::EXPIRE_TIME);
+                hook('afterUserLogin',['user'=>$rs]);
+                $rs['access_token'] = $accessToken;
+                return shopReturn("登录成功",1,$rs);
+            }else{
+                return shopReturn("账户不存在！",0);
+            }
+        }catch (Exception $exception){
+            return shopReturn($exception->getMessage(),0);
+        }
+
     }
 
 

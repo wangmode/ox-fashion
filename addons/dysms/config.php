@@ -24,11 +24,17 @@ return array(
 		'tips'=>''
 	),
 	'PHONE_USER_REGISTER_VERFIY'=>array(
-		'title'=>'用户注册验证码模板ID【模板参考：您的注册验证码为:$&#123;VERFIYCODE}，请及时输入。】',
-		'type'=>'text',
-		'value'=>'',
-		'tips'=>''
-	),
+        'title'=>'用户注册验证码模板ID【模板参考：您的注册验证码为:$&#123;VERFIYCODE}，请及时输入。】',
+        'type'=>'text',
+        'value'=>'',
+        'tips'=>''
+    ),
+    'PHONE_USER_LOGIN_VERFIY'=>array(
+        'title'=>'用户登陆验证码模板ID【模板参考：您的登陆验证码为:$&#123;VERFIYCODE}，请及时输入。】',
+        'type'=>'text',
+        'value'=>'',
+        'tips'=>''
+    ),
 	'PHONE_BIND'=>array(
 		'title'=>'绑定手机提醒模板ID【模板参考：您的正在操作绑定手机，校验码为:$&#123;VERFIYCODE}，请及时输入。】',
 		'type'=>'text',
