@@ -214,6 +214,29 @@ class Goods extends Base{
         }
     }
 
+    /**
+     * 获取商品属性
+     */
+    public function get_spec()
+    {
+        $validate = new Validate([
+            'goodsId'          => 'require',
+        ]);
+        $validate->message([
+            'goodsId.require'          => '商品id格式错误!',
+        ]);
+        $data = $this->request->param();
+        if (!$validate->check($data)) {
+            $this->response(0,$validate->getError());
+        }
+        $m = new M();
+        $re = $m->getSpec($data['goodsId']);
+        $this->response($re);
+    }
+
+    /**
+     * 分享
+     */
     public function share()
     {
         $validate = new Validate([

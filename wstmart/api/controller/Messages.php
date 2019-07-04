@@ -15,7 +15,6 @@ use wstmart\api\model\Messages as MessagesModel;
  * 商城消息控制器
  */
 class Messages extends Base{
-    protected $beforeActionList = ['checkAuth'];
     /**
     * 商城消息
     */

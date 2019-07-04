@@ -101,6 +101,44 @@ class Goods extends CGoods{
 	}
 
     /**
+     * 获取商品规格
+     * @param $goodsId
+     * @return array
+     */
+    public function getSpec($goodsId)
+    {
+        $isSpec =$this->where(['goodsId'=>$goodsId,'dataFlag'=>1])->value('isSpec');
+        $rs = [];
+        if($isSpec==1){
+            //获取规格值
+            try{
+                $specs = Db::name('spec_cats')->alias('gc')->join('__SPEC_ITEMS__ sit','gc.catId=sit.catId','inner')
+                    ->where(['sit.goodsId'=>$goodsId,'gc.isShow'=>1,'sit.dataFlag'=>1])
+                    ->field('gc.isAllowImg,gc.catName,sit.catId,sit.itemId,sit.itemName,sit.itemImg')
+                    ->order('gc.isAllowImg desc,gc.catSort asc,gc.catId asc')->select();
+                foreach ($specs as $key =>$v){
+                    $rs['spec'][$v['catId']]['name'] = $v['catName'];
+                    $rs['spec'][$v['catId']]['list'][] = $v;
+                }
+                //获取销售规格
+                $sales = Db::name('goods_specs')->where('goodsId',$goodsId)->field('id,isDefault,productNo,specIds,marketPrice,specPrice,specStock')->select();
+                if(!empty($sales)){
+                    foreach ($sales as $key =>$v){
+                        $str = explode(':',$v['specIds']);
+                        sort($str);
+                        unset($v['specIds']);
+                        $rs['saleSpec'][implode(':',$str)] = $v;
+                        if($v['isDefault']==1)$rs['defaultSpecs'] = $v;
+                    }
+                }
+            }catch (Exception $exception){
+                return shopReturn($exception->getMessage(),0);
+            }
+        }
+        return shopReturn('商品规格',1,$rs);
+	}
+
+    /**
      * 商品分享
      */
     public function shareInfo()
