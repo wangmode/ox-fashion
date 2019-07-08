@@ -18,39 +18,69 @@ function lastGoodsCatCallback(opts){
 /**初始化**/
 function initEdit(){
 	$('#tab').TabPanel({tab:0,callback:function(no){
-		if(no==1){
+		if(no===1){
 			$('.j-specImg').children().each(function(){
 				if(!$(this).hasClass('webuploader-pick'))$(this).css({width:'80px',height:'25px'});
 			});
 		}
-		if(!initBatchUpload && no==2){
-			initBatchUpload = true;
-			var uploader = batchUpload({uploadPicker:'#batchUpload',uploadServer:WST.U('shop/index/uploadPic'),formData:{dir:'goods',isWatermark:1,isThumb:1},uploadSuccess:function(file,response){
-				var json = WST.toJson(response);
-				if(json.status==1){
-					$li = $('#'+file.id);
-					$li.append('<input type="hidden" class="j-gallery-img" iv="'+json.savePath + json.thumb+'" v="' +json.savePath + json.name+'"/>');
-					//$li.append('<span class="btn-setDefault">默认</span>' );
-	                var delBtn = $('<span class="btn-del">删除</span>');
-	                $li.append(delBtn);
-	                delBtn.on('click',function(){
-	                	delBatchUploadImg($(this),function(){
-	                		if($('.filelist').find('li').length==0){
-	                			$("#batchUpload").find('.placeholder').removeClass( 'element-invisible' );
-						        $('.filelist').parent().removeClass('filled');
-						        $('.filelist').hide();
-						        $("#batchUpload").find('.statusBar').addClass( 'element-invisible' );
-	                		}
-	                		uploader.removeFile(file);
-	        				uploader.refresh();
-	                	});
-	    			});
-	                $('.filelist li').css('border','1px solid rgb(59, 114, 165)');
-				}else{
-					WST.msg(json.msg,{icon:2});
-				}
-			}});
+		if(!initBatchUpload && no===2){
+                initBatchUpload = true;
+                var uploader = batchUpload({uploadPicker:'#batchUpload',uploadServer:WST.U('shop/index/uploadPic'),formData:{dir:'goods',isWatermark:1,isThumb:1},uploadSuccess:function(file,response){
+                    var json = WST.toJson(response);
+                        if(json.status===1){
+                            $li = $('#'+file.id);
+                            $li.append('<input type="hidden" class="j-gallery-img" iv="'+json.savePath + json.thumb+'" v="' +json.savePath + json.name+'"/>');
+                            //$li.append('<span class="btn-setDefault">默认</span>' );
+                            var delBtn = $('<span class="btn-del">删除</span>');
+                            $li.append(delBtn);
+                            delBtn.on('click',function(){
+                                delBatchUploadImg($(this),function(){
+                                    if($('.filelist').find('li').length==0){
+                                        $("#batchUpload").find('.placeholder').removeClass( 'element-invisible' );
+                                        $('.filelist').parent().removeClass('filled');
+                                        $('.filelist').hide();
+                                        $("#batchUpload").find('.statusBar').addClass( 'element-invisible' );
+                                    }
+                                    uploader.removeFile(file);
+                                    uploader.refresh();
+                                });
+                            });
+                            $('.filelist li').css('border','1px solid rgb(59, 114, 165)');
+                        }else{
+                            WST.msg(json.msg,{icon:2});
+                        }
+                }});
 		}
+        if(!initDescUpload && no===3){
+            initDescUpload = true;
+            var uploader1 = descUpload({uploadPicker:'#descUpload',uploadServer:WST.U('shop/index/uploadPic'),formData:{dir:'goods',isWatermark:1,isThumb:1},uploadSuccess:function(file,response){
+                var json = WST.toJson(response);
+                    if(json.status===1){
+                        $li = $('#'+file.id);
+                        $li.append('<input type="hidden" class="j-gallery-img" iv="'+json.savePath + json.thumb+'" v="' +json.savePath + json.name+'"/>');
+                        var delBtn = $('<span class="btn-del">删除</span>');
+                        $li.append(delBtn);
+                        delBtn.on('click',function(){
+                            delBatchUploadImg($(this),function(){
+                                if($('.desc-list').find('li').length==0){
+                                    $("#descUpload").find('.placeholder').removeClass( 'element-invisible' );
+                                    $('.desc-list').parent().removeClass('filled');
+                                    $('.desc-list').hide();
+                                    $("#batchUpload").find('.statusBar').addClass( 'element-invisible' );
+                                }
+                                uploader1.removeFile(file);
+                                uploader1.refresh();
+                            });
+                        });
+                        $('.desc-list li').css('border','1px solid rgb(59, 114, 165)');
+                    }else{
+                        WST.msg(json.msg,{icon:2});
+                    }
+                }});
+        }
+
+
+
 		$('.btn-del').click(function(){
 			delBatchUploadImg($(this),function(){
 				if($('.filelist').find('li').length==0){
@@ -64,6 +94,7 @@ function initEdit(){
         	});
 		})
 	}});
+
 	WST.upload({
 	  	  pick:'#goodsImgPicker',
 	  	  formData: {dir:'goods',isWatermark:1,isThumb:1},

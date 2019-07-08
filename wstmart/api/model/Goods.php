@@ -118,6 +118,7 @@ class Goods extends CGoods{
                     ->order('gc.isAllowImg desc,gc.catSort asc,gc.catId asc')->select();
                 foreach ($specs as $key =>$v){
                     $rs['spec'][$v['catId']]['name'] = $v['catName'];
+                    if($v['isAllowImg']==1)$v['itemImg'] = formatUrl($v['itemImg'],2);
                     $rs['spec'][$v['catId']]['list'][] = $v;
                 }
                 //获取销售规格
@@ -148,9 +149,9 @@ class Goods extends CGoods{
           $goods_info = $this->where('goodsId',$goodsId)->field('goodsName,goodsImg')->find();
           $goods_info['goodsImg'] = formatUrl($goods_info['goodsImg'],2);
           $goods_info['description'] = '我在ox-fashion发现了一个不错的商品，赶快来看看吧！';
-          shopReturn('分享',1,$goods_info);
+          return shopReturn('分享',1,$goods_info);
       }catch (Exception $exception){
-          shopReturn('分享',0);
+          return shopReturn('分享',0);
       }
 	}
 	

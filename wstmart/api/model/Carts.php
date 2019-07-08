@@ -7,6 +7,8 @@ use  wstmart\common\model\Carts as CCarts;
 use think\facade\Request;
 use think\facade\Validate;
 use think\Exception;
+use wstmart\common\model\FlashSale;
+use wstmart\common\model\goodsSpecs;
 
 /**
  * ============================================================================
@@ -245,6 +247,47 @@ class Carts extends Model {
         //店铺优惠活动监听
         hook("afterQueryCarts",["carts"=>&$cartData,'isSettlement'=>$isSettlement,'isVirtual'=>false,'uId'=>$userId]);
         return $cartData;
+    }
+
+    /**
+     * @param $cartList
+     * @return mixed
+     */
+    public function checkCartList($cartList)
+    {
+        foreach ($cartList as $cartKey => $cart) {
+            //商品不存在或者已经下架
+            if (empty($cart['goods']) || $cart['goods']['is_on_sale'] != 1 || $cart['goods_num'] == 0) {
+                $cart->delete();
+                unset($cartList[$cartKey]);
+                continue;
+            }
+            //活动商品的活动是否失效
+            if (!empty($cart['spec_key'])) {
+                $goodsSpecs = goodsSpecs::get(['goods_id' => $cart['goods_id'], 'item_id' => $cart['item_id']], '', true);
+                if ($goodsSpecs['prom_id'] != $cart['prom_id']) {
+                    $cart->delete();
+                    unset($cartList[$cartKey]);
+                    continue;
+                }
+            } else {
+                if ($cart['goods']['prom_id'] != $cart['prom_id']) {
+                    $cart->delete();
+                    unset($cartList[$cartKey]);
+                    continue;
+                }
+                $goodsSpecs = null;
+            }
+            $flashSale = new FlashSale($cart['goods'],$goodsSpecs);
+            if ($flashSale && !$flashSale->isAble()) {
+                //$cart->delete();
+                unset($cartList[$cartKey]);
+                continue;
+            }
+
+        }
+        //$this->getUserCartGoodsNum();//删除后，需要重新设置cookie值
+        return $cartList;
     }
 
     /**

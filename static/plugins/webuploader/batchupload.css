@@ -65,6 +65,86 @@
     text-decoration: underline;
 }
 
+.wst-batchupload .desc-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.wst-batchupload .desc-list:after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    clear: both;
+}
+
+.wst-batchupload .desc-list li {
+    width: 180px;
+    height: 180px;
+    background: url(bg.png) no-repeat;
+    text-align: center;
+    margin: 0 8px 20px 0;
+    position: relative;
+    display: inline;
+    float: left;
+    overflow: hidden;
+    font-size: 12px;
+}
+
+.wst-batchupload .desc-list li p.log {
+    position: relative;
+    top: -45px;
+}
+
+.wst-batchupload .desc-list li p.title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow : ellipsis;
+    top: 5px;
+    text-indent: 5px;
+    text-align: left;
+}
+
+.wst-batchupload .desc-list li p.progress {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    height: 8px;
+    overflow: hidden;
+    z-index: 50;
+    margin: 0;
+    border-radius: 0;
+    background: none;
+    -webkit-box-shadow: 0 0 0;
+}
+.wst-batchupload .desc-list li p.progress span {
+    display: none;
+    overflow: hidden;
+    width: 0;
+    height: 100%;
+    background: #1483d8 url(progress.png) repeat-x;
+
+    -webit-transition: width 200ms linear;
+    -moz-transition: width 200ms linear;
+    -o-transition: width 200ms linear;
+    -ms-transition: width 200ms linear;
+    transition: width 200ms linear;
+
+    -webkit-animation: progressmove 2s linear infinite;
+    -moz-animation: progressmove 2s linear infinite;
+    -o-animation: progressmove 2s linear infinite;
+    -ms-animation: progressmove 2s linear infinite;
+    animation: progressmove 2s linear infinite;
+
+    -webkit-transform: translateZ(0);
+}
 .wst-batchupload .filelist {
     list-style: none;
     margin: 0;
@@ -196,7 +276,9 @@
 .wst-batchupload .filelist li img {
     width: 100%;
 }
-
+.wst-batchupload .desc-list li img {
+    width: 100%;
+}
 .wst-batchupload .filelist li p.error {
     background: #f43838;
     color: #fff;
@@ -208,7 +290,17 @@
     width: 100%;
     z-index: 100;
 }
-
+.wst-batchupload .desc-list li p.error {
+    background: #f43838;
+    color: #fff;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 28px;
+    line-height: 28px;
+    width: 100%;
+    z-index: 100;
+}
 .wst-batchupload .filelist li .success {
     display: block;
     position: absolute;
@@ -219,8 +311,28 @@
     z-index: 200;
     background: url(success.png) no-repeat right bottom;
 }
-
+.wst-batchupload .desc-list li .success {
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 40px;
+    width: 100%;
+    z-index: 200;
+    background: url(success.png) no-repeat right bottom;
+}
 .wst-batchupload .filelist div.file-panel {
+    position: absolute;
+    height: 0;
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#80000000', endColorstr='#80000000')\0;
+    background: rgba( 0, 0, 0, 0.5 );
+    width: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: 300;
+}
+.wst-batchupload .desc-list div.file-panel {
     position: absolute;
     height: 0;
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#80000000', endColorstr='#80000000')\0;
@@ -243,25 +355,52 @@
     margin: 5px 1px 1px;
     cursor: pointer;
 }
+.wst-batchupload .desc-list div.file-panel span {
+    width: 24px;
+    height: 24px;
+    display: inline;
+    float: right;
+    text-indent: -9999px;
+    overflow: hidden;
+    background: url(icons.png) no-repeat;
+    margin: 5px 1px 1px;
+    cursor: pointer;
+}
 
 .wst-batchupload .filelist div.file-panel span.rotateLeft {
+    background-position: 0 -24px;
+}
+.wst-batchupload .desc-list div.file-panel span.rotateLeft {
     background-position: 0 -24px;
 }
 .wst-batchupload .filelist div.file-panel span.rotateLeft:hover {
     background-position: 0 0;
 }
-
+.wst-batchupload .desc-list div.file-panel span.rotateLeft:hover {
+    background-position: 0 0;
+}
 .wst-batchupload .filelist div.file-panel span.rotateRight {
+    background-position: -24px -24px;
+}
+.wst-batchupload .desc-list div.file-panel span.rotateRight {
     background-position: -24px -24px;
 }
 .wst-batchupload .filelist div.file-panel span.rotateRight:hover {
     background-position: -24px 0;
 }
-
+.wst-batchupload .desc-list div.file-panel span.rotateRight:hover {
+    background-position: -24px 0;
+}
 .wst-batchupload .filelist div.file-panel span.cancel {
     background-position: -48px -24px;
 }
+.wst-batchupload .desc-list div.file-panel span.cancel {
+    background-position: -48px -24px;
+}
 .wst-batchupload .filelist div.file-panel span.cancel:hover {
+    background-position: -48px 0;
+}
+.wst-batchupload .desc-list div.file-panel span.cancel:hover {
     background-position: -48px 0;
 }
 
@@ -365,7 +504,31 @@
     top:0px;
     z-index: 9999;
 }
+.desc-list .btn-setDefault{
+    background: #f48c3a none repeat scroll 0 0;
+    bottom: 0;
+    color: #ffffff;
+    height: 18px;
+    line-height: 18px;
+    padding: 0 5px;
+    position: absolute;
+    left: 0px;
+    top:0px;
+    z-index: 9999;
+}
 .filelist .btn-del{
+     background: #1094FA;
+     color: #ffffff;
+     cursor: pointer;
+     height: 18px;
+     line-height: 18px;
+     padding: 0 5px;
+     position: absolute;
+     right: 0px;
+     top:0px;
+     z-index: 9999;
+ }
+.desc-list .btn-del{
     background: #1094FA;
     color: #ffffff;
     cursor: pointer;

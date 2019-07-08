@@ -146,7 +146,7 @@ $('.btn-del').click(function(){
         $(this).parent().remove();
         uploader.refresh();
       });
-    })
+    });
 
 function delBatchUploadImg(obj,fn){
   var c = WST.confirm({content:'您确定要删除广告图片吗?',yes:function(){

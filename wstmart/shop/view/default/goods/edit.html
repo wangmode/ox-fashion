@@ -17,6 +17,7 @@ label{font-weight: normal;}
 	   <li>商品信息</li>
 	   <li>规格属性</li>
 	   <li>商品相册</li>
+       <li>描述图片</li>
 	</ul>
     <div class="wst-tab-content" style='width:99%;margin-bottom: 10px;border:0px;'>
       <form id='editform' autocomplete='off'>
@@ -29,6 +30,9 @@ label{font-weight: normal;}
         <div class="wst-tab-item" style="position: relative;display:none">
         {include file='default/goods/edit2'/}
         </div>
+      <div class="wst-tab-item" style="position: relative;display:none">
+          {include file='default/goods/edit3'/}
+      </div>
      </form>
     </div>
 </div>
@@ -38,9 +42,10 @@ label{font-weight: normal;}
 <script src="__STATIC__/plugins/kindeditor/kindeditor.js?v={$v}" type="text/javascript" ></script>
 <script type="text/javascript" src="__STATIC__/plugins/validator/jquery.validator.min.js?v={$v}"></script>
 <script type='text/javascript' src='__STATIC__/plugins/webuploader/batchupload.js?v={$v}'></script>
+<script type='text/javascript' src='__STATIC__/plugins/webuploader/descupload.js?v={$v}'></script>
 <script type='text/javascript' src='__SHOP__/goods/goods.js?v={$v}'></script>
 <script>
-var initBatchUpload = false,editor1 = null,specNum = 0,src='{$src}';
+var initBatchUpload = false, initDescUpload = false,editor1 = null,specNum = 0,src='{$src}';
 {php}unset($object['goodsDesc']);{/php}
 var OBJ = <?=json_encode($object)?>;
 $(function(){initEdit()});

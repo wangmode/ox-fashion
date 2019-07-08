@@ -297,6 +297,8 @@ class GoodsAppraises extends Model {
 			if($anonymous){
 				$rs['data'][$k]['loginName'] = WSTAnonymous($v['loginName']);
 			}
+			$images = formatUrl($rs['images'],1);
+            $rs['images'] = explode(',',$images);
 			//获取用户等级
 			$rrs = WSTUserRank($v['userTotalScore']);
 			$rs['data'][$k]['rankImg']  = $rrs['userrankImg'];

@@ -6,13 +6,13 @@
  *    uploadSuccess:上传成功后的回调函数
  * }
  */
-function batchUpload(options){
+function descUpload(options){
     var $ = jQuery,    // just in case. Make sure it's not an other libaray.
     opts = $.extend({},{formData:{dir:'uploads',width:700,height:700},fileNumLimit:50,fileSizeLimit:50 * 5 * 1024 * 1024,fileSingleSizeLimit:5 * 1024 * 1024},options),
         $wrap = $(opts.uploadPicker),
 
         // 图片容器
-        $queue = $('.filelist'),  
+        $queue = $('.desc-list'),
         // 状态栏，包括进度和控制按钮
         $statusBar = $wrap.find('.statusBar'),
 
@@ -68,7 +68,7 @@ function batchUpload(options){
     // 实例化
     uploader = WebUploader.create({
         pick: {
-            id: '#filePicker',
+            id: '#filePicker1',
             label: '点击选择图片'
         },
         dnd: '.wst-batchupload .queueList',
@@ -93,7 +93,7 @@ function batchUpload(options){
 
     // 添加“添加文件”的按钮，
     uploader.addButton({
-        id: '#filePicker2',
+        id: '#filePicker3',
         label: '继续添加'
     });
 
@@ -295,7 +295,7 @@ function batchUpload(options){
 
             case 'ready':
                 $placeHolder.addClass( 'element-invisible' );
-                $( '#filePicker2' ).removeClass( 'element-invisible');
+                $( '#filePicker3' ).removeClass( 'element-invisible');
                 $queue.parent().addClass('filled');
                 $queue.show();
                 $statusBar.removeClass('element-invisible');
@@ -303,7 +303,7 @@ function batchUpload(options){
                 break;
 
             case 'uploading':
-                $( '#filePicker2' ).addClass( 'element-invisible' );
+                $( '#filePicker3' ).addClass( 'element-invisible' );
                 $progress.show();
                 $upload.text( '暂停上传' );
                 break;
@@ -326,7 +326,7 @@ function batchUpload(options){
             case 'finish':
                 stats = uploader.getStats();
                 if ( stats.successNum ) {
-                	$( '#filePicker2' ).removeClass( 'element-invisible');
+                	$( '#filePicker3' ).removeClass( 'element-invisible');
                 	$upload.removeClass('.disabled');
                     //WST.msg( '上传成功' );
                 } else {

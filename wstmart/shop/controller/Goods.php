@@ -126,6 +126,7 @@ class Goods extends Base{
         $object = $m->getEModel('goods');
         $object['goodsSn'] = WSTGoodsNo();
         $object['productNo'] = WSTGoodsNo();
+        $object['desc'] = '';
         $src=input("src")?input("src"):'add';
         $data = ['object'=>$object,'src'=>$src];
         return $this->fetch('goods/edit',$data);
@@ -145,6 +146,7 @@ class Goods extends Base{
     public function edit(){
         $m = new M();
         $object = $m->getById(input('get.id'));
+        $object['desc'] = '';
         $this->assign("p",(int)input("p"));
         $data = ['object'=>$object,'src'=>input('src')];
         return $this->fetch('goods/edit',$data);
