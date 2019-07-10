@@ -2,11 +2,16 @@
 namespace wstmart\api\controller;
 use think\Db;
 use think\Exception;
+use think\facade\Request;
 use wstmart\api\model\Goods as M;
+use wstmart\common\model\FlashSale;
+use wstmart\common\model\FlashSaleModel;
 use wstmart\common\model\Goods as CM;
 use wstmart\common\model\Attributes as AT;
 use wstmart\api\model\GoodsCats;
 use think\Validate;
+use wstmart\common\model\goodsSpecs;
+
 /**
  * ============================================================================
  * WSTMart多用户商城
@@ -212,6 +217,30 @@ class Goods extends Base{
         }else{
             $this->response(0,'商品不存在');
         }
+    }
+
+    public function activity()
+    {
+        $goodsId = Request::post('goodsId/d');//商品id
+        $item_id = Request::post('goodsId/d');//规格id
+        $Goods = new M();
+        $goods = $Goods::get($goodsId);
+        if ($goods['is_sell']) {
+            if ($item_id) {
+                $goodsSpecs = goodsSpecs::get($item_id);
+                $flashSale = new FlashSaleModel($goods, $goodsSpecs);
+            } else {
+                $flashSale = new FlashSaleModel($goods,null);
+            }
+            if ($flashSale->checkActivityIsAble()) {
+                $goods = $flashSale->getActivityGoodsInfo();
+                $goods['activity_is_on'] = 1;
+                $this->response(1,'该商品参与活动！',$goods);
+            } else {
+                $this->response(0,'该商品不参与活动！');
+            }
+        }
+        $this->response(0,'该商品不参与活动！');
     }
 
     /**

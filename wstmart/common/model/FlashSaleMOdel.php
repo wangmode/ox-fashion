@@ -16,7 +16,47 @@ use wstmart\common\model\goodsSpecs;
  * ============================================================================
  * 促销
  */
-class FlashSale extends Base{
+class FlashSaleModel extends Base{
+    protected $flashSale;//抢购活动模型
+    protected $goods;//商品模型
+    protected $goodsSpecs;//商品规格模型
+    public function __construct($goods, $goodsSpecs)
+    {
+        parent::__construct();
+        $this->goods = $goods;
+        $this->goodsSpecs = $goodsSpecs;
+
+        if($this->goodsSpecs){
+            //活动商品有规格，规格和活动是一对一
+            $this->flashSale = FlashSale::get($goodsSpecs['flash_id']);
+        }else{
+            //活动商品没有规格，活动和商品是一对一
+            $this->flashSale = FlashSale::get($goods['flash_id']);
+        }
+        if ($this->flashSale) {
+            //每次初始化都检测活动是否结束，如果失效就更新活动和商品恢复成普通商品
+            if ($this->checkActivityIsEnd() && $this->flashSale['is_end'] == 0) {
+                if($this->goodsSpecs){
+                    //print_r($this->goodsSpecs);exit;
+                    $where['goodsId'] = $this->goodsSpecs['goodsId'];
+                    goodsSpecs::where($where)->update(['is_sell' => 0, 'flash_id' => 0]);
+                    $where['is_sell'] = 0;
+                    $goodsPromCount = goodsSpecs::where($where)->count();
+                    if($goodsPromCount == 0){
+                        goods::where('id',$this->goodsSpecs['goodsId'])->update(['is_sell' => 0, 'flash_id' => 0]);
+                    }
+                    unset($this->goodsSpecs);
+                    $this->goodsSpecs = goodsSpecs::get($goodsSpecs['id']);
+                }else{
+                    goods::where('goodsId',$this->flashSale['goods_id'])->update(['is_sell' => 0, 'flash_id' => 0]);
+                }
+                $this->flashSale->is_end = 1;
+                $this->flashSale->save();
+                unset($this->goods);
+                $this->goods = Goods::get($goods['goodsId']);
+            }
+        }
+    }
 
     /**
      * 活动是否正在进行
@@ -32,20 +72,12 @@ class FlashSale extends Base{
         return false;
     }
 
-    public function goodsSpecs()
-    {
-        return $this->hasOne('goodsSpecs','id','spec_id');
-    }
-
     /**
      * 活动是否结束
      * @return bool
      */
     public function checkActivityIsEnd(){
         if(empty($this->flashSale)){
-            return true;
-        }
-        if($this->flashSale['buy_num'] >= $this->flashSale['goods_num']){
             return true;
         }
         if(time() > $this->flashSale['end_time']){
@@ -121,7 +153,7 @@ class FlashSale extends Base{
         if($this->goodsSpecs){
             //活动商品有规格，规格和活动是一对一
             $activityGoods = $this->goodsSpecs;
-            $activityGoods['market_price'] =$this->goodsSpecs['price'];
+            $activityGoods['market_price'] =$this->goodsSpecs['specPrice'];
         }else{
             //活动商品没有规格，活动和商品是一对一
             $activityGoods = $this->goods;

@@ -23,26 +23,28 @@ use think\Validate;
  */
 class Orders extends Model{
 	protected $pk = 'orderId';
-	/**
-	 * 快速下单
-	 */
-	public function quickSubmit($orderSrc = 0, $uId=0){
+    /**
+     * 快速下单
+     * @param int $orderSrc
+     * @param int $userId
+     * @return array
+     */
+	public function quickSubmit($orderSrc = 0, $userId=0){
 		$deliverType = 0;
 		$isInvoice = ((int)input('post.isInvoice')!=0)?1:0;
 		$invoiceClient = ($isInvoice==1)?input('post.invoiceClient'):'';
 		$payType = 1;
-		$userId = ($uId==0)?(int)session('WST_USER.userId'):$uId;
 		if($userId==0)return WSTReturn('下单失败，请先登录');
 		$isUseScore = (int)input('isUseScore');
 		$useScore = (int)input('useScore');
 		//检测购物车
-		$carts = model('common/carts')->getQuickCarts($uId);
+		$carts = model('common/carts')->getQuickCarts($userId);
 		if(empty($carts['carts']))return WSTReturn("请选择要购买的商品");
 		//使用积分金额不能超过商品金额
 		$tempScoreMoney = WSTScoreToMoney($carts['goodsTotalMoney']-$carts['promotionMoney'],true);
 		$useScore = ($useScore>$tempScoreMoney)?$tempScoreMoney:$useScore;
 		$orderScoreMap = [];
-		$scoreMoney = $this->getOrderScoreMoney($isUseScore,$useScore,$uId);
+		$scoreMoney = $this->getOrderScoreMoney($isUseScore,$useScore,$userId);
 		//生成订单
 		Db::startTrans();
 		try{
@@ -291,6 +293,7 @@ class Orders extends Model{
 	         	if($vv=='')continue;
 	         	if(!in_array($vv,$areaIds))$areaIds[] = $vv;
 	        }
+
 	        if(!empty($areaIds)){
 		         $areas = Db::name('areas')->where([['areaId','in',$areaIds],['dataFlag','=',1]])->field('areaId,areaName')->select();
 		         foreach ($areas as $v){
@@ -304,6 +307,7 @@ class Orders extends Model{
 		         	 $address['areaName'] = implode('',$areaNames);
 		         }
 	        }
+
 			$address['userAddress'] = $address['areaName'].$address['userAddress'];
 			WSTUnset($address, 'isDefault,dataFlag,createTime,userId');
 		}else{

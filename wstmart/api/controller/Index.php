@@ -1,5 +1,8 @@
 <?php
 namespace wstmart\api\controller;
+use think\facade\Request;
+use wstmart\api\model\Tools;
+use wstmart\common\model\FlashSale;
 use wstmart\common\model\Tags;
 /**
  * ============================================================================
@@ -21,6 +24,34 @@ class Index extends Base{
             $goods[$kk]['goodsImg'] = formatUrl($vv['goodsImg'],2);
         }
         $this->response(1,'推荐商品！',$goods);
+    }
+
+    //秒杀时间间隔
+    public function time(){
+        $time = Tools::flash_sale_time_space();
+        $this->response(1,'时间列表！',$time);
+    }
+
+    public function flash_sale_list()
+    {
+        $start_time = Request::post('start_time');
+        $end_time = Request::post('end_time');
+        $where = array(
+            'fl.start_time'=>array('egt',$start_time),
+            'fl.end_time'=>array('elt',$end_time),
+            'fl.is_end'=>0
+        );
+        $FlashSale = new FlashSale();
+        $flash_sale_goods = $FlashSale->alias('fl')->join('__GOODS__ g', 'g.goodsId = fl.goods_id')
+            ->field('g.shopPrice,g.goodsImg,fl.*')
+            ->where($where)
+            ->select();
+        if($flash_sale_goods){
+            foreach ($flash_sale_goods as $k=>$v){
+                $flash_sale_goods[$k]['goodsImg'] = formatUrl($v['goodsImg'],2);
+            }
+        }
+        $this->response(1,'秒杀商品',$flash_sale_goods);
     }
 
     //搜索关键词

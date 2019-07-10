@@ -8,6 +8,7 @@ use think\facade\Request;
 use think\facade\Validate;
 use think\Exception;
 use wstmart\common\model\FlashSale;
+use wstmart\common\model\FlashSaleModel;
 use wstmart\common\model\goodsSpecs;
 
 /**
@@ -167,7 +168,7 @@ class Carts extends Model {
             ->join($prefix.'shops','s.shopId=g.shopId','left')
             ->join($prefix.'goods_specs','c.goodsSpecId=gs.id','left')
             ->where($where)
-            ->field('c.goodsSpecId,c.cartId,s.userId,s.shopId,s.shopName,g.goodsId,s.shopQQ,shopWangWang,g.goodsName,g.shopPrice,g.goodsStock,g.isSpec,gs.specPrice,gs.specStock,g.goodsImg,c.isCheck,gs.specIds,c.cartNum,g.goodsCatId,g.isFreeShipping')
+            ->field('c.goodsSpecId,c.cartId,gs.is_sell as spec_is_sell,gs.flash_id as spec_flash_id,s.userId,s.shopId,s.shopName,g.goodsId,s.shopQQ,shopWangWang,g.goodsName,g.shopPrice,g.is_sell,g.flash_id,g.goodsStock,g.isSpec,gs.specPrice,gs.specStock,g.goodsImg,c.isCheck,gs.specIds,c.cartNum,g.goodsCatId,g.isFreeShipping')
             ->select();
         $carts = [];
         $goodsIds = [];
@@ -191,7 +192,30 @@ class Carts extends Model {
             if($v['isSpec']==1){
                 $v['shopPrice'] = $v['specPrice'];
                 $v['goodsStock'] = $v['specStock'];
+                if($v['spec_is_sell']){
+
+                    $goodsSpecs = goodsSpecs::get($v['goodsSpecId']);
+                    $flashSale = new FlashSaleModel($v, $goodsSpecs);
+
+                    if ($flashSale->checkActivityIsAble()) {
+
+                        $goods = $flashSale->getActivityGoodsInfo();
+
+                        $v['shopPrice'] = $goods['shop_price'];
+
+                    }
+                }
+            }else{
+                if($v['is_sell']){
+                    $flashSale = new FlashSaleModel($v,null);
+                    if ($flashSale->checkActivityIsAble()) {
+                        $goods = $flashSale->getActivityGoodsInfo();
+                        $v['shopPrice'] = $goods['shop_price'];
+                    }
+                }
             }
+
+
             //判断能否购买，预设allowBuy值为10，为将来的各种情况预留10个情况值，从0到9
             $v['allowBuy'] = 10;
             if($v['goodsStock']<=0){
@@ -205,14 +229,17 @@ class Carts extends Model {
                 $this->disChkGoods($v['goodsId'],(int)$v['goodsSpecId'],(int)session('WST_USER.userId'));
                 continue;
             }
+
             if($v['isCheck']==1){
                 $carts[$v['shopId']]['goodsMoney'] = $carts[$v['shopId']]['goodsMoney'] + $v['shopPrice'] * $v['cartNum'];
                 $goodsTotalMoney = $goodsTotalMoney + $v['shopPrice'] * $v['cartNum'];
                 $goodsTotalNum++;
             }
+
             $v['specNames'] = [];
             unset($v['shopName']);
             $carts[$v['shopId']]['list'][] = $v;
+
             if(!in_array($v['goodsId'],$goodsIds))$goodsIds[] = $v['goodsId'];
         }
 
@@ -239,11 +266,14 @@ class Carts extends Model {
                 }
             }
         }
+
         //过滤无效店铺
         foreach($carts as $key => $v){
             if(!isset($v['list']))unset($carts[$key]);
         }
+
         $cartData = ['carts'=>$carts,'goodsTotalMoney'=>$goodsTotalMoney,'goodsTotalNum'=>$goodsTotalNum,'promotionMoney'=>0];
+
         //店铺优惠活动监听
         hook("afterQueryCarts",["carts"=>&$cartData,'isSettlement'=>$isSettlement,'isVirtual'=>false,'uId'=>$userId]);
         return $cartData;
@@ -306,7 +336,7 @@ class Carts extends Model {
         $rs = $this->alias('c')->join('__GOODS__ g','c.goodsId=g.goodsId','inner')
             ->join('__GOODS_SPECS__ gs','c.goodsSpecId=gs.id','left')
             ->where($where)
-            ->field('c.goodsSpecId,c.cartId,g.goodsId,g.goodsName,g.shopPrice,g.goodsStock,g.isSpec,gs.specPrice,gs.specStock,g.goodsImg,c.isCheck,gs.specIds,c.cartNum')
+            ->field('c.goodsSpecId,c.cartId,gs.is_sell as spec_is_sell,gs.flash_id as spec_flash_id,g.goodsId,g.goodsName,g.shopPrice,g.is_sell,g.flash_id,g.goodsStock,g.isSpec,gs.specPrice,gs.specStock,g.goodsImg,c.isCheck,gs.specIds,c.cartNum')
             ->select();
         $goodsIds = [];
         $goodsTotalMoney = 0;
@@ -316,12 +346,27 @@ class Carts extends Model {
             if($v['isSpec']==1){
                 $v['shopPrice'] = $v['specPrice'];
                 $v['goodsStock'] = $v['specStock'];
+                if($v['spec_is_sell']){
+                    $goodsSpecs = goodsSpecs::get($v['goodsSpecId']);
+                    $flashSale = new FlashSaleModel($v, $goodsSpecs);
+                    if ($flashSale->checkActivityIsAble()) {
+                        $goods = $flashSale->getActivityGoodsInfo();
+                        $v['shopPrice'] = $goods['shop_price'];
+                    }
+                }
+            }else{
+                if($v['is_sell']){
+                    $flashSale = new FlashSaleModel($v,null);
+                    if ($flashSale->checkActivityIsAble()) {
+                        $goods = $flashSale->getActivityGoodsInfo();
+                        $v['shopPrice'] = $goods['shop_price'];
+                    }
+                }
             }
             if($v['goodsStock']<$v['cartNum']){
                 $v['cartNum'] = $v['goodsStock'];
             }
             $goodsTotalMoney = $goodsTotalMoney + $v['shopPrice'] * $v['cartNum'];
-            //$rs[$key]['goodsImg'] = WSTImg($v['goodsImg']);
             $rs[$key]['goodsImg'] = formatUrl($v['goodsImg'],2);
         }
         //加载规格值
